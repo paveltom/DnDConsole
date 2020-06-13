@@ -1,3 +1,5 @@
+package BusinessLayer;
+
 public class Coordinate {
     private int x;
     private int y;
