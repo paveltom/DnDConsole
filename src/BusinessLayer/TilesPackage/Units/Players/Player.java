@@ -6,11 +6,25 @@ import BusinessLayer.TilesPackage.Units.Unit;
 public class Player extends Unit {
 
     private Integer experience;
-    private Integer level;
+    protected Integer level;
 
-    public Player(){
-        this.experience = 0;
-        this.level = 1;
+    public Player(String[][] p){
+        super(p);
+        if(p[1][0]=="Warrior")
+            new Warrior(p);
+        else if(p[1][0]=="Warrior") {
+            new Mage(p);
+        }
+        new Rogue(p);
+
+        level=1;
+        experience=0;
+    }
+    public void LevelUP()
+    {
+        experience=experience-50*level;
+        level=level+1;
+        super.leveluphealth(10,level);
     }
 
     @Override

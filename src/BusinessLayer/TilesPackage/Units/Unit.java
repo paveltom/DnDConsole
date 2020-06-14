@@ -2,7 +2,10 @@ package BusinessLayer.TilesPackage.Units;
 
 import BusinessLayer.Coordinate;
 import BusinessLayer.Subscriber;
+import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
+import BusinessLayer.TilesPackage.Units.Players.Player;
 
 import java.util.List;
 
@@ -12,13 +15,23 @@ public abstract class Unit implements Tile, Subscriber {
     private Integer healthPool;
     private Integer healthAmount;
     private Integer health; // get\set?????
-    private Integer attackPoints;
+    protected Integer attackPoints;
     private Integer defensePoints;
+
+    public Unit(String[][] p) {
+        name=p[1][1];
+        healthAmount=Integer.parseInt(p[1][3]);
+        healthPool=healthAmount;
+        attackPoints=Integer.parseInt(p[1][4]);
+        defensePoints=Integer.parseInt(p[1][5]);
+    }
 
     //getters for all the fields?????????
 
-    public Unit(List<Object[]> unitStats){
-
+    public Unit Unit(String[][] data){
+        if(data[0][0]=="P"){
+            return new Player(data);
+        }else return new Enemy(data);
     }
 
     public abstract String actualStats();
@@ -27,7 +40,10 @@ public abstract class Unit implements Tile, Subscriber {
 
     //abstract move
     //abstract
-
+    public void leveluphealth(int i,int level)
+    {
+        healthPool=healthPool+i*level;
+    }
     @Override
     public void update(Object context) {
     }

@@ -18,7 +18,7 @@ public class Creator {
     private final String[] rd = {"Type","Name","Health:","Attack:","Defense:","Level:","Experience:","Energy:"};
     private final String[] Md = {"Type","Name","Health:","Attack:","Defense:","Vision Range","Experience Value"};
     private final String[] td = {"Type","Name","Health:","Attack:","Defense:","Experience Value","Visibility Time","Invisibility Time"};
-    private final String[] jon_snow ={w,"Jon Snow","300","30","4","1","0/50","0/3"};
+    private final String[] jon_snow ={w,"Jon Snow","300","30","4","1","50","3"};
     private final String[] the_hound ={w,"The Hound","400","20","6","5"};
     private final String[] melisandre ={ma,"Melisandre","100","5","1","300","30","15","5","6"};
     private final String[] thoros_of_myr ={ma,"Thoros of Myr","250","25","4","150","20","20","3","4"};
@@ -75,8 +75,9 @@ public class Creator {
             {
                 String[][] curr = CharactersDataBase.get(level[i][j]);
                 String type = curr[1][1];
-                temp[j]=new Tile(type);
+                temp[j];
             }
+            board[i]=temp;
         }
     }
     private void setjon_snow()

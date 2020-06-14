@@ -1,4 +1,41 @@
 package BusinessLayer.TilesPackage.Units.Players;
 
 public class Mage extends Player {
+    private int manapool;
+    private int curmana;
+    private int manacost;
+    private int spellpower;
+    private int hitcount;
+    private int range;
+
+    public Mage(String[][] p) {
+        super(p);
+        manapool=Integer.parseInt(p[1][5]);
+        curmana=manacost;
+        manacost=Integer.parseInt(p[1][6]);
+        spellpower=Integer.parseInt(p[1][7]);
+        hitcount=Integer.parseInt(p[1][8]);
+        range=Integer.parseInt(p[1][9]);
+    }
+    public void levelUp()
+    {
+        super.LevelUP();
+        manapool=manapool+(25*level);
+        curmana=Math.min(curmana+manapool/4,manapool);
+        spellpower=spellpower+(10*level);
+    }
+    public void Ontickgame()
+    {
+        curmana=Math.min(manapool,curmana+level);
+    }
+    public void Onabilitycost() throws Exception {
+        if(curmana<manacost) throw new Exception();
+        else {
+            curmana=curmana-manacost;
+            int hit=0;
+            while(hit<hitcount){////////////////////
+
+            }
+        }
+    }
 }
