@@ -44,8 +44,9 @@ public class Board {
                 checkUPTile();
             if(!tickcheck)
                 throw new Exception();
+            tickcheck=false;
         }
-        
+        /////// special ability!!!!!!
     }
     public void checkRightTile()
     {
@@ -60,6 +61,7 @@ public class Board {
                 CurrBoard[x][y] = change;
             } else Combat(Player,"R");
         }
+        tickcheck=true;
     }
     public void checkLeftTile()
     {
@@ -74,7 +76,7 @@ public class Board {
                 CurrBoard[x][y] = change;
             } else Combat(Player,"L");
         }
-
+        tickcheck=true;
     }
     public void checkDownTile()
     {
@@ -89,7 +91,7 @@ public class Board {
                 CurrBoard[x][y] = change;
             }else Combat(Player,"D");
         }
-
+        tickcheck=true;
     }
     public void checkUPTile()
     {
@@ -105,6 +107,7 @@ public class Board {
             }
             else Combat(Player,"U");
         }
+        tickcheck=true;
     }
     private void Combat(Tile A,String derc){}
 }
