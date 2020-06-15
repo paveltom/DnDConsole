@@ -10,13 +10,6 @@ public class Player extends Unit {
 
     public Player(String[][] p){
         super(p);
-        if(p[1][0]=="Warrior")
-            new Warrior(p);
-        else if(p[1][0]=="Warrior") {
-            new Mage(p);
-        }
-        new Rogue(p);
-
         level=1;
         experience=0;
     }
@@ -30,6 +23,11 @@ public class Player extends Unit {
     @Override
     public String actualStats() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Coordinate actionPerTick(String s) {
+        return null;
     }
 
     @Override

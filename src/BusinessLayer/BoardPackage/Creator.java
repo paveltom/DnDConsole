@@ -1,11 +1,16 @@
 package BusinessLayer.BoardPackage;
 
+import BusinessLayer.TilesPackage.Environment.Empty;
+import BusinessLayer.TilesPackage.Environment.Wall;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
+import BusinessLayer.TilesPackage.Units.Enemies.Monster;
+import BusinessLayer.TilesPackage.Units.Enemies.Trap;
+import BusinessLayer.TilesPackage.Units.Players.Mage;
+import BusinessLayer.TilesPackage.Units.Players.Rogue;
+import BusinessLayer.TilesPackage.Units.Players.Warrior;
 
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Creator {
     private final String w = "Warrior";
@@ -38,10 +43,12 @@ public class Creator {
     private final String[] queens_trap ={t,"Queen’s Trap","250","50","10","100","3","7"};
     private final String[] death_trap ={t,"Death Trap","1","1","1","250","1","10"};
     private Map<String,String[][]> CharactersDataBase;
+    private List<Enemy> EnemyList;
     private Tile [][] board;
 
-    public Creator(String[][] level){
+    public Creator(){
         CharactersDataBase = new HashMap<>();
+        EnemyList = new ArrayList<>();
         setjon_snow();
         setthe_hound();
         setmelisandre();
@@ -61,10 +68,11 @@ public class Creator {
         setBonus_trap();
         setQueens_trap();
         setDeath_trap();
-
+        setEmpty();
+        setWall();
     }
 
-    private void createBoard(String[][] level)
+    public Tile [][] createBoard(String[][] level,int p)
     {
         board =new Tile[level.length][];
         Tile[] temp;
@@ -73,12 +81,55 @@ public class Creator {
             temp=new Tile[level[i].length];
             for(int j=0;j<level[i].length;j++)
             {
-                String[][] curr = CharactersDataBase.get(level[i][j]);
-                String type = curr[1][1];
-                temp[j];
+                String type;
+                String[][] curr;
+                if(level[i][j].equals("@"))
+                {
+                    curr=CharactersDataBase.get(p+"");
+                    type = curr[1][0];
+                    if (type.equals("Warrior"))
+                        temp[j] = new Warrior(curr);
+                    else if (type.equals("Mage"))
+                        temp[j] = new Mage(curr);
+                    else if (type.equals("Rogue"))
+                        temp[j] = new Rogue(curr);
+                }
+                else {
+                    curr = CharactersDataBase.get(level[i][j]);
+                    type = curr[1][0];
+                    if (type.equals("Empty"))
+                        temp[j] = new Empty();
+                    else if (type.equals("Wall"))
+                        temp[j] = new Wall();
+                    else if (type.equals("Trap")) {
+                        Enemy t= new Trap(curr);
+                        EnemyList.add(t);
+                        temp[j] = t;
+                    }
+                    else if (type.equals("Monster")) {
+                        Enemy m = new Monster(curr);
+                        EnemyList.add(m);
+                        temp[j]=m;
+                    }
+                }
             }
             board[i]=temp;
         }
+        return board;
+    }
+
+    public List<Enemy> getEnemyList(){return EnemyList;}
+    private void setEmpty()
+    {
+        String[][] e =new String[2][];
+        e[1][0]="Empty";
+        CharactersDataBase.put("_",e);
+    }
+    private void setWall()
+    {
+        String[][] w =new String[2][];
+        w[1][0]="Wall";
+        CharactersDataBase.put("#",w);
     }
     private void setjon_snow()
     {
