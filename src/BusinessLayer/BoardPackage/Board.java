@@ -51,8 +51,8 @@ public class Board {
     public void checkRightTile()
     {
         Coordinate temp = Player.getPosition();
-        int x=temp.getRowCoordinate();
-        int y=temp.getolumnCoordinate();
+        int y=temp.getRowCoordinate();
+        int x=temp.getolumnCoordinate();
         if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
             if (CurrBoard[x][y + 1].ToString().equals("."))///////////////////////////////////
             {
@@ -66,10 +66,10 @@ public class Board {
     public void checkLeftTile()
     {
         Coordinate temp = Player.getPosition();
-        int x=temp.getRowCoordinate();
-        int y=temp.getolumnCoordinate();
-        if(!(CurrBoard[x][y-1].getCharacter()instanceof Wall)) {
-            if (CurrBoard[x][y - 1].getCharacter() instanceof Empty)/////////////////////////////////////
+        int y=temp.getRowCoordinate();
+        int x=temp.getolumnCoordinate();
+        if(!(CurrBoard[x][y-1].ToString().equals("#"))) {
+            if (CurrBoard[x][y - 1].ToString().equals("."))/////////////////////////////////////
             {
                 Tile change = CurrBoard[x][y - 1];
                 CurrBoard[x][y - 1] = CurrBoard[x][y];
@@ -81,10 +81,10 @@ public class Board {
     public void checkDownTile()
     {
         Coordinate temp = Player.getPosition();
-        int x=temp.getRowCoordinate();
-        int y=temp.getolumnCoordinate();
-        if(!(CurrBoard[x-1][y].getCharacter()instanceof Wall)) {
-            if (CurrBoard[x-1][y].getCharacter() instanceof Empty)/////////////////////////////////////
+        int y=temp.getRowCoordinate();
+        int x=temp.getolumnCoordinate();
+        if(!(CurrBoard[x-1][y].ToString().equals("#"))) {
+            if (CurrBoard[x-1][y].ToString().equals("."))/////////////////////////////////////
             {
                 Tile change = CurrBoard[x][y - 1];
                 CurrBoard[x-1][y] = CurrBoard[x][y];
@@ -96,10 +96,10 @@ public class Board {
     public void checkUPTile()
     {
         Coordinate temp = Player.getPosition();
-        int x=temp.getRowCoordinate();
-        int y=temp.getolumnCoordinate();
-        if(!(CurrBoard[x+1][y].getCharacter()instanceof Wall)) {
-            if (CurrBoard[x+1][y].getCharacter() instanceof Empty)/////////////////////////////////////
+        int y=temp.getRowCoordinate();
+        int x=temp.getolumnCoordinate();
+        if(!(CurrBoard[x+1][y].ToString().equals("#"))) {
+            if (CurrBoard[x+1][y].ToString().equals("."))/////////////////////////////////////
             {
                 Tile change = CurrBoard[x+1][y];
                 CurrBoard[x+1][y] = CurrBoard[x][y];

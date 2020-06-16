@@ -18,17 +18,17 @@ public class Creator {
     private final String r ="Rogue";
     private final String t = "Trap";
     private final String m = "Monster";
-    private final String[] wd = {"Type","Name","Health:","Attack:","Defense:","Level:","Experience:","Cooldown:"};
-    private final String[] md = {"Type","Name","Health:","Attack:","Defense:","Level:","Experience:","Mana:","Spell Power"};
-    private final String[] rd = {"Type","Name","Health:","Attack:","Defense:","Level:","Experience:","Energy:"};
-    private final String[] Md = {"Type","Name","Health:","Attack:","Defense:","Vision Range","Experience Value"};
-    private final String[] td = {"Type","Name","Health:","Attack:","Defense:","Experience Value","Visibility Time","Invisibility Time"};
+    private final String[] wd = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Cooldown:"};
+    private final String[] md = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Mana:","Spell Power:"};
+    private final String[] rd = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Energy:"};
+    private final String[] Md = {"Type:","Name:","Health:","Attack:","Defense:","Vision Range","Experience Value:"};
+    private final String[] td = {"Type:","Name:","Health:","Attack:","Defense:","Experience Value:","Visibility Time:","Invisibility Time:"};
     private final String[] jon_snow ={w,"Jon Snow","300","30","4","1","50","3"};
-    private final String[] the_hound ={w,"The Hound","400","20","6","5"};
+    private final String[] the_hound ={w,"The Hound","400","20","6","1","50","5"};
     private final String[] melisandre ={ma,"Melisandre","100","5","1","300","30","15","5","6"};
     private final String[] thoros_of_myr ={ma,"Thoros of Myr","250","25","4","150","20","20","3","4"};
-    private final String[] arya_stark ={r,"Arya Stark","150","40","2","20"};
-    private final String[] bronn ={r,"Bronn","250","35","3","50"};
+    private final String[] arya_stark ={r,"Arya Stark","150","40","2","1","50","100"};
+    private final String[] bronn ={r,"Bronn","250","35","3","1","50","100"};
     private final String[] lannister_solider ={m,"Lannister Solider","80","8","3","3","25"};
     private final String[] lannister_knight ={m,"Lannister Knight","200","14","8","4","50"};
     private final String[] queens_guard ={m,"Queen’s Guard","400","20","15","5","100"};
@@ -45,6 +45,9 @@ public class Creator {
     private Map<String,String[][]> CharactersDataBase;
     private List<Enemy> EnemyList;
     private Tile [][] board;
+    private String playerSelection = "Select Player:" + '\n';
+    private int ExpD=0;
+    private int ManaD;
 
     public Creator(){
         CharactersDataBase = new HashMap<>();
@@ -72,6 +75,37 @@ public class Creator {
         setWall();
     }
 
+    public String PlayerSelection()
+    {
+        int i=1;
+        String [][] curr = CharactersDataBase.get(i+"");
+        while(curr!=null)
+        {
+            int run = curr[0].length;
+            playerSelection+=i+". ";
+            for(int j=1;j<curr[0].length;j++) {
+                if (curr[0][j] != "Health:" & curr[0][j] != "Experience:" & curr[0][j] != "Cooldown:"& curr[0][j] != "Mana:"& curr[0][j] != "Energy:") {
+                    playerSelection += curr[0][j] + " '" + curr[1][j] + "'  ";
+                }
+                else if (curr[0][j] == "Health:" | curr[0][j] == "Energy:" ) {
+                    playerSelection += curr[0][j] + " '" + curr[1][j] + "/" + curr[1][j]+"'  ";
+                }
+                else if (curr[0][j] == "Experience:" | curr[0][j] == "Cooldown:") {
+                    playerSelection += curr[0][j] + " '" + ExpD + "/" + curr[1][j] + "'  ";
+                }
+                else if (curr[0][j] == "Mana:") {
+                    ManaD=Integer.parseInt(curr[1][j])/4;
+                    playerSelection += curr[0][j] + " '" + ManaD + "/" + curr[1][j]+"'  ";
+                }
+                if(j==4)
+                    playerSelection+='\n';
+            }
+            playerSelection+='\n';
+            i++;
+            curr=CharactersDataBase.get(i+"");
+        }
+        return playerSelection;
+    }
     public Tile [][] createBoard(String[][] level,int p)
     {
         board =new Tile[level.length][];
@@ -88,26 +122,26 @@ public class Creator {
                     curr=CharactersDataBase.get(p+"");
                     type = curr[1][0];
                     if (type.equals("Warrior"))
-                        temp[j] = new Warrior(curr);
+                        temp[j] = new Warrior(curr,j,i);
                     else if (type.equals("Mage"))
-                        temp[j] = new Mage(curr);
+                        temp[j] = new Mage(curr,j,i);
                     else if (type.equals("Rogue"))
-                        temp[j] = new Rogue(curr);
+                        temp[j] = new Rogue(curr,j,i);
                 }
                 else {
                     curr = CharactersDataBase.get(level[i][j]);
                     type = curr[1][0];
                     if (type.equals("Empty"))
-                        temp[j] = new Empty();
+                        temp[j] = new Empty(j,i);
                     else if (type.equals("Wall"))
-                        temp[j] = new Wall();
+                        temp[j] = new Wall(j,i);
                     else if (type.equals("Trap")) {
-                        Enemy t= new Trap(curr);
+                        Enemy t= new Trap(curr,j,i);
                         EnemyList.add(t);
                         temp[j] = t;
                     }
                     else if (type.equals("Monster")) {
-                        Enemy m = new Monster(curr);
+                        Enemy m = new Monster(curr,j,i);
                         EnemyList.add(m);
                         temp[j]=m;
                     }
@@ -121,13 +155,13 @@ public class Creator {
     public List<Enemy> getEnemyList(){return EnemyList;}
     private void setEmpty()
     {
-        String[][] e =new String[2][];
+        String[][] e =new String[2][2];
         e[1][0]="Empty";
-        CharactersDataBase.put("_",e);
+        CharactersDataBase.put(".",e);
     }
     private void setWall()
     {
-        String[][] w =new String[2][];
+        String[][] w =new String[2][2];
         w[1][0]="Wall";
         CharactersDataBase.put("#",w);
     }
