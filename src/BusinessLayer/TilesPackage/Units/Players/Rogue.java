@@ -12,6 +12,6 @@ public class Rogue extends Player {
     {
         super.LevelUP();
         energy=100;
-        attackPoints=attackPoints+(3*level);
+        attackPoints=attackPoints+(3*Level);
     }
 }

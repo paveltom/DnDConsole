@@ -14,7 +14,7 @@ public class Warrior extends Player {
     {
         super.LevelUP();
         coolDowncaunter=0;
-        super.leveluphealth(5,super.level);
+        this.levelUpHealth(5, Level);
     }
     public void Ongametick()
     {

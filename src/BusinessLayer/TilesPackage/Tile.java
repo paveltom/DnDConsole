@@ -4,8 +4,8 @@ import BusinessLayer.Coordinate;
 
 public class Tile {
 
-    private Coordinate Position;
-    private char TileSymbol;
+    protected Coordinate Position;
+    protected char TileSymbol;
 
     public Tile(Coordinate position, char tileSymbol) {
         this.Position = position;

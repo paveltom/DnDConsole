@@ -20,13 +20,13 @@ public class Mage extends Player {
     public void levelUp()
     {
         super.LevelUP();
-        manapool=manapool+(25*level);
+        manapool=manapool+(25*Level);
         curmana=Math.min(curmana+manapool/4,manapool);
-        spellpower=spellpower+(10*level);
+        spellpower=spellpower+(10*Level);
     }
     public void Ontickgame()
     {
-        curmana=Math.min(manapool,curmana+level);
+        curmana=Math.min(manapool,curmana+Level);
     }
     public void Onabilitycost() throws Exception {
         if(curmana<manacost) throw new Exception();

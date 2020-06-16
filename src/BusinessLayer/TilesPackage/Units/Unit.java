@@ -11,12 +11,12 @@ import java.util.List;
 
 public abstract class Unit extends Tile implements Subscriber {
 
-    private String name;
-    private Integer healthPool;
-    private Integer healthAmount;
-    private Integer health; // get\set?????
+    protected String name;
+    protected Integer healthPool;
+    protected Integer healthAmount;
+    protected Integer health; // get\set?????
     protected Integer attackPoints;
-    private Integer defensePoints;
+    protected Integer defensePoints;
 
     public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
         super(new Coordinate(x,y), '@');
@@ -37,10 +37,6 @@ public abstract class Unit extends Tile implements Subscriber {
 
     //abstract move
     //abstract
-    public void leveluphealth(int i,int level)
-    {
-        healthPool=healthPool+i*level;
-    }
 
     @Override
     public void update(Object context) {
