@@ -1,8 +1,8 @@
 package BusinessLayer.TilesPackage.Units.Players;
 
 public class Warrior extends Player {
-    private int coolDown;
-    private int coolDowncaunter;
+    public int coolDown;
+    public int coolDowncaunter;
 
     public Warrior(String[][] p, int x, int y) {
         super(p, x, y);
@@ -14,7 +14,7 @@ public class Warrior extends Player {
     {
         super.LevelUP();
         coolDowncaunter=0;
-        this.levelUpHealth(5, Level);
+        //self levelUp method implement here
     }
     public void Ongametick()
     {

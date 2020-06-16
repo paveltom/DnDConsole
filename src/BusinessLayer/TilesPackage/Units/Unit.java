@@ -11,12 +11,14 @@ import java.util.List;
 
 public abstract class Unit extends Tile implements Subscriber {
 
-    protected String Name;
-    protected Integer HealthPool; //maximum health
-    protected Integer HealthAmount; //current health
-    protected Integer Health; // get\set?????
-    protected Integer AttackPoints;
-    protected Integer DefensePoints;
+    public Integer Experience;
+    public String Name;
+    public Integer HealthPool; //maximum health
+    public Integer HealthAmount; //current health
+    public Integer Health; // get\set?????
+    public Integer AttackPoints;
+    public Integer DefensePoints;
+    public boolean ActualStatus;
 
     public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
         super(new Coordinate(x, y), '@');
@@ -26,6 +28,9 @@ public abstract class Unit extends Tile implements Subscriber {
         this.AttackPoints = Integer.parseInt(p[1][4]);
         this.DefensePoints = Integer.parseInt(p[1][5]);
     }
+
+    //updateStatus - listener pattern
+    //updateTick
 
     //getters for all the fields?????????
 

@@ -1,12 +1,12 @@
 package BusinessLayer.TilesPackage.Units.Players;
 
 public class Mage extends Player {
-    private int manapool;
-    private int curmana;
-    private int manacost;
-    private int spellpower;
-    private int hitcount;
-    private int range;
+    public int manapool;
+    public int curmana;
+    public int manacost;
+    public int spellpower;
+    public int hitcount;
+    public int range;
 
     public Mage(String[][] boardData, int x, int y) {
         super(boardData, x, y);
@@ -18,7 +18,7 @@ public class Mage extends Player {
         range=Integer.parseInt(boardData[1][9]);
     }
 
-    public void levelUp()
+    public void LevelUP()
     {
         super.LevelUP();
         manapool=manapool+(25*Level);

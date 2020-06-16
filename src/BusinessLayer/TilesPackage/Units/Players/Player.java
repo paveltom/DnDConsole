@@ -6,8 +6,7 @@ import java.util.List;
 
 public class Player extends Unit {
 
-    protected Integer Experience;
-    protected Integer Level;
+    public Integer Level;
 
     public Player(String[][] p, int x, int y) {
         super(p, x, y);
