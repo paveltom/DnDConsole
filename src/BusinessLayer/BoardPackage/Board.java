@@ -80,7 +80,7 @@ public class Board {
     }
 
 
-    private void Action (Player currPlayer){  // ==>  in case of special ability{
+    private void Action (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
 
     }
 
@@ -101,6 +101,8 @@ public class Board {
     private void updateActualStatus() { //observer pattern update method => all the listeners update their actualStatus (= alive/dead (=true/false))
         throw new UnsupportedOperationException();
     }
+
+    //combatResultMethod that adds strings to output in the end of an combat action (specialAbility or combat)
 
 
 
