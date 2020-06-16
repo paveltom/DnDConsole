@@ -25,10 +25,6 @@ public class Player extends Unit {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Coordinate actionPerTick(String s) {
-        return null;
-    }
 
     @Override
     public Coordinate actionPerTick(){

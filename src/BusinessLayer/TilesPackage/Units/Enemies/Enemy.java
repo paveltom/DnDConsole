@@ -11,10 +11,10 @@ public class Enemy extends Unit {
         super(boardData, x, y);
     }
 
-    public Enemy Enemy(String[][] e){
-        if(e[1][0]=="Monster")
-            return new Monster(e);
-        else return new Trap(e);
+    public Enemy Enemy(String[][] boardData, int x, int y){
+        if(boardData[1][0]=="Monster")
+            return new Monster(boardData, x, y);
+        else return new Trap(boardData, x, y);
     }
 
     @Override
