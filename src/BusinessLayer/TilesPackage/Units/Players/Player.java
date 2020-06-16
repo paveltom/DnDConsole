@@ -8,8 +8,8 @@ public class Player extends Unit {
     private Integer experience;
     protected Integer level;
 
-    public Player(String[][] p){
-        super(p);
+    public Player(String[][] p, int x, int y){
+        super(p, x, y);
         level=1;
         experience=0;
     }

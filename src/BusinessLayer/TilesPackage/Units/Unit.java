@@ -29,14 +29,9 @@ public abstract class Unit extends Tile implements Subscriber {
 
     //getters for all the fields?????????
 
-    public Unit Unit(String[][] data){
-        if(data[0][0]=="P"){
-            return new Player(data);
-        }else return new Enemy(data);
-    }
 
     public abstract String actualStats();
-    public abstract Coordinate actionPerTick(String s);
+    //public abstract Coordinate actionPerTick(String s);
     public abstract Coordinate actionPerTick();//??????????????do we need it?
 
     //abstract move

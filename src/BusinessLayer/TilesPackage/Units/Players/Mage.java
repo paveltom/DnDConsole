@@ -8,14 +8,14 @@ public class Mage extends Player {
     private int hitcount;
     private int range;
 
-    public Mage(String[][] p) {
-        super(p);
-        manapool=Integer.parseInt(p[1][5]);
+    public Mage(String[][] boardData, int x, int y) {
+        super(boardData, x, y);
+        manapool=Integer.parseInt(boardData[1][5]);
         curmana=manacost;
-        manacost=Integer.parseInt(p[1][6]);
-        spellpower=Integer.parseInt(p[1][7]);
-        hitcount=Integer.parseInt(p[1][8]);
-        range=Integer.parseInt(p[1][9]);
+        manacost=Integer.parseInt(boardData[1][6]);
+        spellpower=Integer.parseInt(boardData[1][7]);
+        hitcount=Integer.parseInt(boardData[1][8]);
+        range=Integer.parseInt(boardData[1][9]);
     }
     public void levelUp()
     {

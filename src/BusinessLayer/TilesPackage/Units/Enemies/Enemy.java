@@ -7,8 +7,8 @@ import BusinessLayer.TilesPackage.Units.Unit;
 public class Enemy extends Unit {
     private Unit currEnemy;
 
-    public Enemy(String[][] p) {
-        super(p);
+    public Enemy(String[][] boardData, int x, int y) {
+        super(boardData, x, y);
     }
 
     public Enemy Enemy(String[][] e){
