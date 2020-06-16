@@ -2,16 +2,23 @@ package BusinessLayer.TilesPackage;
 
 import BusinessLayer.Coordinate;
 
-public interface Tile {
-    Coordinate position = new Coordinate(-1,-1);
-    Tile character = null;
+public class Tile {
+
+    private Coordinate Position;
+    private char TileSymbol;
+
+    public Tile(Coordinate position, char tileSymbol) {
+        this.Position = position;
+        this.TileSymbol = tileSymbol;
+    }
 
     //returns a coordinate of a Tile on the playing board
-    Coordinate getPosition();
-
-    //returns a current character state of a Tile
-    Tile getCharacter();
+    public Coordinate getPosition() {
+        return this.Position;
+    }
 
     //returns a string that represents current Tile on board
-    String ToString();
+    public String ToString() {
+        return this.TileSymbol + "";
+    }
 }

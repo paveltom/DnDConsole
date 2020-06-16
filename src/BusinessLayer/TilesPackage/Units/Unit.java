@@ -9,7 +9,7 @@ import BusinessLayer.TilesPackage.Units.Players.Player;
 
 import java.util.List;
 
-public abstract class Unit implements Tile, Subscriber {
+public abstract class Unit extends Tile implements Subscriber {
 
     private String name;
     private Integer healthPool;
@@ -18,7 +18,8 @@ public abstract class Unit implements Tile, Subscriber {
     protected Integer attackPoints;
     private Integer defensePoints;
 
-    public Unit(String[][] p) {
+    public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
+        super(new Coordinate(x,y), '@');
         name=p[1][1];
         healthAmount=Integer.parseInt(p[1][3]);
         healthPool=healthAmount;
@@ -47,21 +48,5 @@ public abstract class Unit implements Tile, Subscriber {
     @Override
     public void update(Object context) {
     }
-
-    @Override
-    public Coordinate getPosition() {
-        return position;
-    }
-
-    @Override
-    public Tile getCharacter() {
-        return character;
-    }
-
-    @Override
-    public String ToString() {
-        return null;
-    }
-
 
 }

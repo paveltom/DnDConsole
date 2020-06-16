@@ -3,28 +3,9 @@ package BusinessLayer.TilesPackage.Environment;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Tile;
 
-public class Empty implements Tile {
-    private Coordinate position;
-    private Tile character;
-    public Empty(int x,int y)
-    {
-        position=new Coordinate(x,y);
-        character=new Empty();
-    }
-    public Empty() { }
+public class Empty extends Tile {
 
-    @Override
-    public Coordinate getPosition() {
-        return this.position;
-    }
-
-    @Override
-    public Tile getCharacter() {
-        return ;
-    }
-
-    @Override
-    public String ToString() {
-        return "_";
+    public Empty(int x,int y) {
+        super(new Coordinate(x, y), '.');
     }
 }
