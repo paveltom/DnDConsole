@@ -31,6 +31,7 @@ public abstract class Unit extends Tile implements Subscriber {
 
 
     public abstract String actualStats();
+
     //public abstract Coordinate actionPerTick(String s);
     public abstract Coordinate actionPerTick();//??????????????do we need it?
 
@@ -40,6 +41,7 @@ public abstract class Unit extends Tile implements Subscriber {
     {
         healthPool=healthPool+i*level;
     }
+
     @Override
     public void update(Object context) {
     }

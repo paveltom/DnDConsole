@@ -5,19 +5,19 @@ import BusinessLayer.TilesPackage.Units.Unit;
 
 public class Player extends Unit {
 
-    private Integer experience;
-    protected Integer level;
+    private Integer Experience;
+    protected Integer Level;
 
-    public Player(String[][] p, int x, int y){
+    public Player(String[][] p, int x, int y) {
         super(p, x, y);
-        level=1;
-        experience=0;
+        Level = 1;
+        Experience = 0;
     }
-    public void LevelUP()
-    {
-        experience=experience-50*level;
-        level=level+1;
-        super.leveluphealth(10,level);
+
+    public void LevelUP() {
+        Experience = Experience - 50 * Level;
+        Level = Level + 1;
+        super.leveluphealth(10, Level);
     }
 
     @Override

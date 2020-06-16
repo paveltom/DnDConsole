@@ -53,8 +53,8 @@ public class Board {
         Coordinate temp = Player.getPosition();
         int x=temp.getRowCoordinate();
         int y=temp.getolumnCoordinate();
-        if(!(CurrBoard[x][y+1].getCharacter()instanceof Wall)) {
-            if (CurrBoard[x][y + 1].getCharacter() instanceof Empty)///////////////////////////////////
+        if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
+            if (CurrBoard[x][y + 1].ToString().equals("."))///////////////////////////////////
             {
                 Tile change = CurrBoard[x][y + 1];
                 CurrBoard[x][y + 1] = CurrBoard[x][y];
