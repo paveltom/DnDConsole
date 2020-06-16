@@ -17,6 +17,7 @@ public class Mage extends Player {
         hitcount=Integer.parseInt(boardData[1][8]);
         range=Integer.parseInt(boardData[1][9]);
     }
+
     public void levelUp()
     {
         super.LevelUP();
@@ -24,6 +25,13 @@ public class Mage extends Player {
         curmana=Math.min(curmana+manapool/4,manapool);
         spellpower=spellpower+(10*Level);
     }
+
+//    @Override
+//    public void LevelUP() {
+//        super.LevelUP();
+//    }
+
+
     public void Ontickgame()
     {
         curmana=Math.min(manapool,curmana+Level);
