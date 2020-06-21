@@ -14,7 +14,7 @@ public class Tile {
 
     //returns a coordinate of a Tile on the playing board
     public Coordinate getPosition() {
-        return this.Position;
+        return Position;
     }
 
     //returns a string that represents current Tile on board

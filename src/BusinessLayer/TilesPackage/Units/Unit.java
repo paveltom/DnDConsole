@@ -22,7 +22,7 @@ public abstract class Unit extends Tile implements Subscriber {
 
     public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
         super(new Coordinate(x, y), '@');
-        Name = p[1][1];
+        this.Name = p[1][1];
         this.HealthAmount = Integer.parseInt(p[1][3]);
         this.HealthPool = this.HealthAmount;
         this.AttackPoints = Integer.parseInt(p[1][4]);

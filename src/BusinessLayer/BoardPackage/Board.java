@@ -16,6 +16,7 @@ public class Board {
     private boolean PlayerAlive;
     private Creator BoardCreator;
     private List<String>Output;
+    private String playerselection;
     private boolean tickcheck = false; //?????????????????????????????
 
 
@@ -24,8 +25,9 @@ public class Board {
         this.CurrBoard = new Tile[0][];
         this.Output = new ArrayList<String>();
         this.EnemyList = new ArrayList<Enemy>();
+        playerselection=BoardCreator.PlayerSelection();
     }
-
+    public String playerselection(){ return playerselection;}
     public void crateBoard(String [][] level, int playerChoice) {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
         EnemyList = BoardCreator.getEnemyList();
@@ -186,7 +188,7 @@ public class Board {
 
     public void checkRightTile()
     {
-        Coordinate temp = Player.getPosition();
+        Coordinate temp = CurrPlayer.getPosition();
         int y=temp.getRowCoordinate();
         int x=temp.getolumnCoordinate();
         if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
@@ -195,13 +197,13 @@ public class Board {
                 Tile change = CurrBoard[x][y + 1];
                 CurrBoard[x][y + 1] = CurrBoard[x][y];
                 CurrBoard[x][y] = change;
-            } else Combat(Player,"R");
+            } else Combat(CurrPlayer,"R");
         }
         tickcheck=true;
     }
     public void checkLeftTile()
     {
-        Coordinate temp = Player.getPosition();
+        Coordinate temp = CurrPlayer.getPosition();
         int y=temp.getRowCoordinate();
         int x=temp.getolumnCoordinate();
         if(!(CurrBoard[x][y-1].ToString().equals("#"))) {
@@ -210,13 +212,13 @@ public class Board {
                 Tile change = CurrBoard[x][y - 1];
                 CurrBoard[x][y - 1] = CurrBoard[x][y];
                 CurrBoard[x][y] = change;
-            } else Combat(Player,"L");
+            } else Combat(CurrPlayer,"L");
         }
         tickcheck=true;
     }
     public void checkDownTile()
     {
-        Coordinate temp = Player.getPosition();
+        Coordinate temp = CurrPlayer.getPosition();
         int y=temp.getRowCoordinate();
         int x=temp.getolumnCoordinate();
         if(!(CurrBoard[x-1][y].ToString().equals("#"))) {
@@ -225,13 +227,13 @@ public class Board {
                 Tile change = CurrBoard[x][y - 1];
                 CurrBoard[x-1][y] = CurrBoard[x][y];
                 CurrBoard[x][y] = change;
-            }else Combat(Player,"D");
+            }else Combat(CurrPlayer,"D");
         }
         tickcheck=true;
     }
     public void checkUPTile()
     {
-        Coordinate temp = Player.getPosition();
+        Coordinate temp = CurrPlayer.getPosition();
         int y=temp.getRowCoordinate();
         int x=temp.getolumnCoordinate();
         if(!(CurrBoard[x+1][y].ToString().equals("#"))) {
@@ -241,7 +243,7 @@ public class Board {
                 CurrBoard[x+1][y] = CurrBoard[x][y];
                 CurrBoard[x][y] = change;
             }
-            else Combat(Player,"U");
+            else Combat(CurrPlayer,"U");
         }
         tickcheck=true;
     }
