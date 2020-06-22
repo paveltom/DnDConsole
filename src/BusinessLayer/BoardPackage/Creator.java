@@ -80,8 +80,10 @@ public class Creator {
     {
         String output="";
         for(int a=0;a<board.length;a++) {
-            for (int j = 0; j < board[a].length; j++)
-                output+=board[a][j].toString();
+            for (int j = 0; j < board[a].length; j++) {
+                Tile temp = board[a][j];
+                output+=temp.Toboard();
+            }
             output+='\n';
         }
         return output;
