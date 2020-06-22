@@ -125,7 +125,7 @@ public class Creator {
                     curr=CharactersDataBase.get(p+"");
                     type = curr[1][0];
                     if (type.equals("Warrior")) {
-                        CurrPlayer = new Warrior(curr, j, i);
+                        CurrPlayer = new Warrior(curr, j, i,level[][]);
                         temp[j]=CurrPlayer;
                     }
                     else if (type.equals("Mage")) {

@@ -61,6 +61,7 @@ public class Main {
         }
         b.crateBoard(level,Integer.parseInt(p));
         Unit t = b.getCurrPlayer();
+        System.out.println("You Selected:"+'\n'+t.Name);
         for(int a=0;a<level.length;a++) {
             for (int j = 0; j < level[a].length; j++)
                 System.out.print(level[a][j]);

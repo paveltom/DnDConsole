@@ -20,8 +20,8 @@ public abstract class Unit extends Tile implements Subscriber {
     public Integer DefensePoints;
     public boolean ActualStatus;
 
-    public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
-        super(new Coordinate(x, y), '@');
+    public Unit(String[][] p, int x, int y,char symbol) { // add position and tileSymbol declare
+        super(new Coordinate(x, y), symbol);
         this.Name = p[1][1];
         this.HealthAmount = Integer.parseInt(p[1][2]);
         this.HealthPool = this.HealthAmount;
