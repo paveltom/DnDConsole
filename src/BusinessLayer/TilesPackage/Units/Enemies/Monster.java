@@ -6,9 +6,9 @@ import org.w3c.dom.Node;
 public class Monster extends Enemy {
     private int vision_range;
 
-    public Monster(String[][] boardData, int x, int y)
+    public Monster(String[][] boardData, int x, int y, String s)
     {
-        super(boardData, x, y);
+        super(boardData, x, y,s.charAt(0));
         this.vision_range=Integer.parseInt(boardData[1][5]);
         experience_value=Integer.parseInt(boardData[1][6]);
     }

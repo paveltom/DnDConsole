@@ -4,8 +4,8 @@ public class Rogue extends Player {
     public int cost;
     public int energy=100;
 
-    public Rogue(String[][] p, int x, int y) {
-        super(p, x, y);
+    public Rogue(String[][] p, int x, int y, String s) {
+        super(p, x, y,s.charAt(0));
         cost=Integer.parseInt(p[1][5]);
     }
     public void LevelUP() {

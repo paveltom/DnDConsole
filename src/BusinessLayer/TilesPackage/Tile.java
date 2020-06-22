@@ -19,7 +19,7 @@ public class Tile {
 
     //returns a string that represents current Tile on board
     public String ToString() {
-        return this.TileSymbol + "";
+        return TileSymbol + "";
     }
 
 }

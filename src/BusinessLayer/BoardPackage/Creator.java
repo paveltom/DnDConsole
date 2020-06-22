@@ -76,6 +76,16 @@ public class Creator {
         setEmpty();
         setWall();
     }
+    public String toString()
+    {
+        String output="";
+        for(int a=0;a<board.length;a++) {
+            for (int j = 0; j < board[a].length; j++)
+                output+=board[a][j].toString();
+            output+='\n';
+        }
+        return output;
+    }
     public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
     public Unit getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()
@@ -125,15 +135,15 @@ public class Creator {
                     curr=CharactersDataBase.get(p+"");
                     type = curr[1][0];
                     if (type.equals("Warrior")) {
-                        CurrPlayer = new Warrior(curr, j, i,level[][]);
+                        CurrPlayer = new Warrior(curr, j, i,level[i][j]);
                         temp[j]=CurrPlayer;
                     }
                     else if (type.equals("Mage")) {
-                        CurrPlayer = new Mage(curr, j, i);
+                        CurrPlayer = new Mage(curr, j, i,level[i][j]);
                         temp[j]=CurrPlayer;
                     }
                     else if (type.equals("Rogue")) {
-                        CurrPlayer = new Rogue(curr, j, i);
+                        CurrPlayer = new Rogue(curr, j, i,level[i][j]);
                         temp[j]=CurrPlayer;
                     }
                 }
@@ -145,12 +155,12 @@ public class Creator {
                     else if (type.equals("Wall"))
                         temp[j] = new Wall(j,i);
                     else if (type.equals("Trap")) {
-                        Enemy t= new Trap(curr,j,i);
+                        Enemy t= new Trap(curr,j,i,level[i][j]);
                         EnemyList.add(t);
                         temp[j] = t;
                     }
                     else if (type.equals("Monster")) {
-                        Enemy m = new Monster(curr,j,i);
+                        Enemy m = new Monster(curr,j,i,level[i][j]);
                         EnemyList.add(m);
                         temp[j]=m;
                     }
