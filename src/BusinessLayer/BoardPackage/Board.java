@@ -94,8 +94,8 @@ public class Board {
         int rowToLeave = currCharacter.getPosition().getRowCoordinate();
         this.CurrBoard[rowToGo][columnToGo] = currCharacter;
         this.CurrBoard[rowToLeave][columnToLeave] = tile;
-        currCharacter.setPosition(columnToGo, rowToGo);
-        currCharacter.setPosition(columnToGo, rowToGo);
+        currCharacter.setPosition(columnToGo, rowToGo); //add this methods to Tile
+        tile.setPosition(columnToLeave, rowToLeave); // and this
 
     }
 
