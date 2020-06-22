@@ -4,10 +4,10 @@ public class Warrior extends Player {
     public int coolDown;
     public int coolDowncaunter;
 
-    public Warrior(String[][] p, int x, int y) {
-        super(p, x, y);
-        String s=p[1][7];
-        coolDown=Integer.parseInt(s);
+    public Warrior(String[][] p, int x, int y, String s) {
+        super(p, x, y,s.charAt(0));
+        String t=p[1][7];
+        coolDown=Integer.parseInt(t);
         coolDowncaunter=0;
     }
     public void LevelUP()

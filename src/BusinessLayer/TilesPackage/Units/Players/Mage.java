@@ -8,8 +8,8 @@ public class Mage extends Player {
     public int hitcount;
     public int range;
 
-    public Mage(String[][] boardData, int x, int y) {
-        super(boardData, x, y);
+    public Mage(String[][] boardData, int x, int y, String s) {
+        super(boardData, x, y,s.charAt(0));
         manapool=Integer.parseInt(boardData[1][5]);
         curmana=manacost;
         manacost=Integer.parseInt(boardData[1][6]);
