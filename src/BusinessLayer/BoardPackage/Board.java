@@ -15,8 +15,8 @@ public class Board {
     private List<Enemy> EnemyList;
     private boolean PlayerAlive;
     private Creator BoardCreator;
-    private List<String>Output;
-    private String playerselection;
+    private List<String> Output;
+    private String playerselection;  //????????????????????
     private boolean tickcheck = false; //?????????????????????????????
 
 
@@ -27,13 +27,17 @@ public class Board {
         this.EnemyList = new ArrayList<Enemy>();
         playerselection=BoardCreator.PlayerSelection();
     }
+    
     public String playerselection(){ return playerselection;}
+    
     public void crateBoard(String [][] level, int playerChoice) {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
         EnemyList = BoardCreator.getEnemyList();
         CurrPlayer=BoardCreator.getCurrPlayer();
     }
+    
     public Unit getCurrPlayer(){ return CurrPlayer;}
+    
     public void gameTick(String userInput)
     {
         /*
@@ -49,6 +53,8 @@ public class Board {
 
 
 
+
+         dont forget to clear the Output list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
     }
 
@@ -58,20 +64,13 @@ public class Board {
     }
 
     private void Action (Unit attacker, Unit defender) {
-        int attack = randomize(attacker.AttackPoints);
-        int defend = randomize(defender.DefensePoints);
-        int diff = randomize(attacker.AttackPoints) - randomize(defender.DefensePoints);
-        if (diff < 0) diff = 0;
-        defender.HealthAmount = defender.HealthAmount - diff;
-
+        this.attackDefend(attacker, defender);
         this.updateActualStatus(); //observer pattern update method
 
         this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
         this.Output.add(attacker.actualStats());
         this.Output.add(defender.actualStats());
-        this.Output.add(attacker.Name + " rolled " + attack + " attack points.");
-        this.Output.add(defender.Name + " rolled " + defend + " defense points.");
-        this.Output.add(attacker.Name + " dealt " + diff + " damage to "+defender.Name+".");
+        //attack / defend string are added in this.attackDefend method
 
         this.PlayerAlive = this.CurrPlayer.ActualStatus;
 
@@ -84,7 +83,17 @@ public class Board {
 
 
     private void Action (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
+        //output.add (currPlayer.SpecAbilityPrint);
+        List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
+        int attack = currPlayer.applySpecialAbility(this.EnemyList); //the list is updated in player class itself
+        for(Enemy e : enemiesToAttack) {
 
+            // Maybe this.Action (currPlayer, e);??????????????????????
+
+            this.attackDefend(currPlayer, e);
+            this.updateActualStatus(); //observer pattern update method
+        }
+        
     }
 
     private void Action (Unit currCharacter, Empty tile) { //  ==>  in case of movement
@@ -94,13 +103,23 @@ public class Board {
         int rowToLeave = currCharacter.getPosition().getRowCoordinate();
         this.CurrBoard[rowToGo][columnToGo] = currCharacter;
         this.CurrBoard[rowToLeave][columnToLeave] = tile;
-        currCharacter.setPosition(columnToGo, rowToGo); //add this methods to Tile
-        tile.setPosition(columnToLeave, rowToLeave); // and this
-
+        currCharacter.getPosition().setPosition(columnToGo, rowToGo);
+        tile.getPosition().setPosition(columnToLeave, rowToLeave);
     }
 
     private void Action (Unit currCharacter, Wall tile){ // ==> doesn't move
+        
+    }
 
+    private void attackDefend (Unit attacker, Unit defender){
+        int attack = randomize(attacker.AttackPoints);
+        int defend = randomize(defender.DefensePoints);
+        int diff = attack - defend;
+        if (diff < 0) diff = 0;
+        defender.HealthAmount = defender.HealthAmount - diff;
+        this.Output.add(attacker.Name + " rolled " + attack + " attack points.");
+        this.Output.add(defender.Name + " rolled " + defend + " defense points.");
+        this.Output.add(attacker.Name + " dealt " + diff + " damage to "+defender.Name+".");
     }
 
 
@@ -110,6 +129,10 @@ public class Board {
    }
 
     private void updateActualStatus() { //observer pattern update method => all the listeners update their actualStatus (= alive/dead (=true/false))
+        throw new UnsupportedOperationException();
+    }
+
+    private void updateGameTick() { //observer pattern update method => all the listeners update their tickDepended fields (for exmp. Warrior's cooldown)
         throw new UnsupportedOperationException();
     }
 

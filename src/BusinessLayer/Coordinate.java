@@ -13,6 +13,11 @@ public class Coordinate {
     public int getColumnCoordinate(){ return this.x;}
     public int getRowCoordinate(){ return this.y;}
 
+    public void setPosition(int column, int row) {
+        this.x = column;
+        this.y = row;
+    }
+
     public String ToString(){
         return "<"+x+","+y+">";
     }
