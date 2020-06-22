@@ -23,10 +23,10 @@ public abstract class Unit extends Tile implements Subscriber {
     public Unit(String[][] p, int x, int y) { // add position and tileSymbol declare
         super(new Coordinate(x, y), '@');
         this.Name = p[1][1];
-        this.HealthAmount = Integer.parseInt(p[1][3]);
+        this.HealthAmount = Integer.parseInt(p[1][2]);
         this.HealthPool = this.HealthAmount;
-        this.AttackPoints = Integer.parseInt(p[1][4]);
-        this.DefensePoints = Integer.parseInt(p[1][5]);
+        this.AttackPoints = Integer.parseInt(p[1][3]);
+        this.DefensePoints = Integer.parseInt(p[1][4]);
     }
 
     //updateStatus - listener pattern
@@ -47,5 +47,5 @@ public abstract class Unit extends Tile implements Subscriber {
     @Override
     public void update(Object context) {
     }
-
+    public abstract String status();
 }

@@ -34,11 +34,16 @@ public class Monster extends Enemy {
             return "b";
         else if(Name.charAt(0)=='G')
             return "g";
-        else if(Name.charAt(0)=='K')
-            return "K";
+        else return "K";
     }
+    public int getVision_range(){return vision_range;}
     @Override
     public Coordinate actionPerTick() {
         return null;
+    }
+    @Override
+    public String status()
+    {
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+experience_value+'\n'+"Vision Range: "+vision_range;
     }
 }

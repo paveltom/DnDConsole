@@ -26,4 +26,9 @@ public class Warrior extends Player {
             coolDowncaunter=coolDown;
         }
     }
+    @Override
+    public String status()
+    {
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Cooldown: "+coolDowncaunter+"/"+coolDown;
+    }
 }

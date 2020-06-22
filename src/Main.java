@@ -3,6 +3,8 @@ import java.util.Scanner;
 import BusinessLayer.BoardPackage.Creator;
 import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.TilesPackage.Units.Players.Warrior;
+import BusinessLayer.TilesPackage.Units.Unit;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +27,8 @@ public class Main {
     }
     public static String [][] readfile(String[] args) throws FileNotFoundException {
         for(int a=0;a<args.length;a++){System.out.println(args[a]);}
-        File test = new File("level1.txt");
-        if(!test.exists()) System.out.println(test.getAbsolutePath());
+        File test = new File("levels/level3.txt");
+        if(!test.exists()) System.out.println(test.getAbsolutePath());/////////////////////
         int i=0;
         Scanner myscanner = new Scanner(test);
         Scanner run1 =  new Scanner(test);
@@ -58,10 +60,17 @@ public class Main {
             }
         }
         b.crateBoard(level,Integer.parseInt(p));
+        Unit t = b.getCurrPlayer();
         for(int a=0;a<level.length;a++) {
             for (int j = 0; j < level[a].length; j++)
                 System.out.print(level[a][j]);
             System.out.println();
         }
+        String temp =t.status();
+        System.out.println(temp);
+//        Creator c = new Creator();
+//        Map<String,String[][]> t =c.getMap();
+//        Tile a = new Warrior(t.get("2"),0,0);
+//        System.out.println(a.status());
     }
 }

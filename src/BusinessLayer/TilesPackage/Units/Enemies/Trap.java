@@ -31,7 +31,11 @@ public class Trap extends Enemy {
         if(tick_count==(visibility_time+invisibility_time))
             tick_count=0;
         else tick_count++;
-
         return null;
+    }
+    @Override
+    public String status()
+    {
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+experience_value;
     }
 }

@@ -9,6 +9,7 @@ import BusinessLayer.TilesPackage.Units.Enemies.Trap;
 import BusinessLayer.TilesPackage.Units.Players.Mage;
 import BusinessLayer.TilesPackage.Units.Players.Rogue;
 import BusinessLayer.TilesPackage.Units.Players.Warrior;
+import BusinessLayer.TilesPackage.Units.Unit;
 
 import java.util.*;
 
@@ -44,6 +45,7 @@ public class Creator {
     private final String[] death_trap ={t,"Death Trap","1","1","1","250","1","10"};
     private Map<String,String[][]> CharactersDataBase;
     private List<Enemy> EnemyList;
+    private Unit CurrPlayer;
     private Tile [][] board;
     private String playerSelection = "Select Player:" + '\n';
     private int ExpD=0;
@@ -74,7 +76,8 @@ public class Creator {
         setEmpty();
         setWall();
     }
-
+    public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
+    public Unit getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()
     {
         int i=1;
@@ -121,12 +124,18 @@ public class Creator {
                 {
                     curr=CharactersDataBase.get(p+"");
                     type = curr[1][0];
-                    if (type.equals("Warrior"))
-                        temp[j] = new Warrior(curr,j,i);
-                    else if (type.equals("Mage"))
-                        temp[j] = new Mage(curr,j,i);
-                    else if (type.equals("Rogue"))
-                        temp[j] = new Rogue(curr,j,i);
+                    if (type.equals("Warrior")) {
+                        CurrPlayer = new Warrior(curr, j, i);
+                        temp[j]=CurrPlayer;
+                    }
+                    else if (type.equals("Mage")) {
+                        CurrPlayer = new Mage(curr, j, i);
+                        temp[j]=CurrPlayer;
+                    }
+                    else if (type.equals("Rogue")) {
+                        CurrPlayer = new Rogue(curr, j, i);
+                        temp[j]=CurrPlayer;
+                    }
                 }
                 else {
                     curr = CharactersDataBase.get(level[i][j]);

@@ -13,4 +13,24 @@ public class Rogue extends Player {
         energy = 100;
         AttackPoints = AttackPoints + (3 * Level);
     }
+
+//    public void Ongametick()
+//    {
+//        energy=Math.min(energy+10,100);
+//    }
+
+//    public void On_ability_cast()
+//    {
+//        if(energy<cost)
+//            System.out.println("Error Massage");
+//        else {
+//            energy=energy-cost;
+//
+//        }
+//    }
+    @Override
+    public String status ()
+    {
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Energy:"+energy;
+    }
 }

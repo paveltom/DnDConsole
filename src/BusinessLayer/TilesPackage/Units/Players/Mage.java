@@ -46,4 +46,9 @@ public class Mage extends Player {
             }
         }
     }
+    @Override
+    public String toString ()
+    {
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Mana: "+curmana+"/"+manapool;
+    }
 }

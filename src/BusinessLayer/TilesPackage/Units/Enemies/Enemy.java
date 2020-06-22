@@ -20,4 +20,9 @@ public class Enemy extends Unit {
     public Coordinate actionPerTick() {
         return null;
     }
+
+    @Override
+    public String status() {
+        return null;
+    }
 }

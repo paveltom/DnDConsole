@@ -31,8 +31,9 @@ public class Board {
     public void crateBoard(String [][] level, int playerChoice) {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
         EnemyList = BoardCreator.getEnemyList();
+        CurrPlayer=BoardCreator.getCurrPlayer();
     }
-
+    public Unit getCurrPlayer(){ return CurrPlayer;}
     public void gameTick(String userInput)
     {
         /*
