@@ -76,6 +76,16 @@ public class Creator {
         setEmpty();
         setWall();
     }
+    public String toString()
+    {
+        String output="";
+        for(int a=0;a<board.length;a++) {
+            for (int j = 0; j < board[a].length; j++)
+                output+=board[a][j].toString();
+            output+='\n';
+        }
+        return output;
+    }
     public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
     public Unit getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()

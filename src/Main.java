@@ -50,25 +50,28 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Board b = new Board();
         String [][] level =readfile(args);
-        System.out.println(b.playerselection());
-        String p = "";
-        while (p == "") {
-            p = scan.nextLine();
-            if (!(p.compareTo("0") > 0 & p.compareTo("7") < 0)) {
-                System.out.println("Select a player according to numbers 1 to 6");
-                p = "";
-            }
-        }
-        b.crateBoard(level,Integer.parseInt(p));
-        Unit t = b.getCurrPlayer();
-        System.out.println("You Selected:"+'\n'+t.Name);
-        for(int a=0;a<level.length;a++) {
-            for (int j = 0; j < level[a].length; j++)
-                System.out.print(level[a][j]);
-            System.out.println();
-        }
-        String temp =t.status();
-        System.out.println(temp);
+        Creator c = new Creator();
+        c.createBoard(level,1);
+        System.out.println(c.toString());
+//        System.out.println(b.playerselection());
+//        String p = "";
+//        while (p == "") {
+//            p = scan.nextLine();
+//            if (!(p.compareTo("0") > 0 & p.compareTo("7") < 0)) {
+//                System.out.println("Select a player according to numbers 1 to 6");
+//                p = "";
+//            }
+//        }
+//        b.crateBoard(level,Integer.parseInt(p));
+//        Unit t = b.getCurrPlayer();
+//        System.out.println("You Selected:"+'\n'+t.Name);
+//        for(int a=0;a<level.length;a++) {
+//            for (int j = 0; j < level[a].length; j++)
+//                System.out.print(level[a][j]);
+//            System.out.println();
+//        }
+//        String temp =t.status();
+//        System.out.println(temp);
 //        Creator c = new Creator();
 //        Map<String,String[][]> t =c.getMap();
 //        Tile a = new Warrior(t.get("2"),0,0);

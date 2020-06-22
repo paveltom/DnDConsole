@@ -9,7 +9,7 @@ public class Trap extends Enemy {
     private boolean visible;
 
     public Trap(String[][] boardData, int x, int y, String s) {
-        super(boardData, x, y);
+        super(boardData, x, y,s.charAt(0));
         experience_value=Integer.parseInt(boardData[1][5]);
         visibility_time=Integer.parseInt(boardData[1][6]);
         invisibility_time=Integer.parseInt(boardData[1][7]);
