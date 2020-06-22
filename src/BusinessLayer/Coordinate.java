@@ -10,7 +10,7 @@ public class Coordinate {
     }
 
     //getleft
-    public int getolumnCoordinate(){ return this.x;}
+    public int getColumnCoordinate(){ return this.x;}
     public int getRowCoordinate(){ return this.y;}
 
     public String ToString(){

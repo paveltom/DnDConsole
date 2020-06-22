@@ -88,6 +88,14 @@ public class Board {
     }
 
     private void Action (Unit currCharacter, Empty tile) { //  ==>  in case of movement
+        int columnToGo = tile.getPosition().getColumnCoordinate();
+        int rowToGo = tile.getPosition().getRowCoordinate();
+        int columnToLeave = currCharacter.getPosition().getColumnCoordinate();
+        int rowToLeave = currCharacter.getPosition().getRowCoordinate();
+        this.CurrBoard[rowToGo][columnToGo] = currCharacter;
+        this.CurrBoard[rowToLeave][columnToLeave] = tile;
+        currCharacter.setPosition(columnToGo, rowToGo);
+        currCharacter.setPosition(columnToGo, rowToGo);
 
     }
 
