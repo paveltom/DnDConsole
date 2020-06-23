@@ -47,5 +47,6 @@ public abstract class Unit extends Tile implements Subscriber {
     @Override
     public void update(Object context) {
     }
+
     public abstract String status();
 }

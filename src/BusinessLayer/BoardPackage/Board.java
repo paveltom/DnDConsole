@@ -74,7 +74,7 @@ public class Board {
 
         this.PlayerAlive = this.CurrPlayer.ActualStatus;
 
-        if (!this.PlayerAlive) this.Output.add(this.CurrPlayer.Name+" is dead. Game Over.");
+        if (!this.PlayerAlive) this.Output.add(this.CurrPlayer.Name+" was killed by " + attacker.Name+". \nYou lost.");
         else if(!defender.ActualStatus){
             this.Output.add(defender.Name + " died. "+attacker.Name+" gained "+ defender.Experience +" experience.");
             //this.Output.AddAll(this.CurrPlayer.updateExperience(defender.Experience)); => updateExperience returns List<String>
@@ -83,15 +83,21 @@ public class Board {
 
 
     private void Action (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
-        //output.add (currPlayer.SpecAbilityPrint);
+        //output.add (currPlayer.SpecialAbility);
         List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
-        int attack = currPlayer.applySpecialAbility(this.EnemyList); //the list is updated in player class itself
+        int attack = currPlayer.applySpecialAbility(enemiesToAttack, this.Output); //both lists are updated in player class itself
         for(Enemy e : enemiesToAttack) {
-
-            // Maybe this.Action (currPlayer, e);??????????????????????
-
-            this.attackDefend(currPlayer, e);
+            int defend = randomize(e.DefensePoints);
+            int diff = attack - defend;
+            if (diff < 0) diff = 0;
+            e.HealthAmount = e.HealthAmount - diff;
+            this.Output.add(e.Name + " rolled " + defend + " defense points.");
+            this.Output.add(currPlayer.Name + " dealt " + diff + " damage to "+e.Name+".");
             this.updateActualStatus(); //observer pattern update method
+            if (!e.ActualStatus) {
+                this.Output.add(e.Name + " died. " + currPlayer.Name + " gained " + e.Experience + " experience.");
+                currPlayer.updateExperience(e.Experience, this.Output);// => updateExperience returns List<String>
+            }
         }
         
     }

@@ -24,8 +24,13 @@ public class Player extends Unit {
         this.DefensePoints = this.DefensePoints + this.Level;
     }
 
-    public int applySpecialAbility(List<Enemy> enemies){ //returns the damage that will be caused to randomly (depends on players class) chosen enemies
+    public int applySpecialAbility(List<Enemy> enemies, List<String> output){ //returns the damage that will be caused to randomly (depends on players class) chosen enemies
+        //special ability logic and prints
         throw new UnsupportedOperationException();
+    }
+
+    public void updateExperience(int experience, List<String> output){
+
     }
 
 
