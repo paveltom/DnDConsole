@@ -1,6 +1,7 @@
 import BusinessLayer.BoardPackage.Board;
 import java.util.Scanner;
 import BusinessLayer.BoardPackage.Creator;
+import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Players.Warrior;
