@@ -11,8 +11,9 @@ import java.util.List;
 
 public class Board {
     private Tile[][] CurrBoard;
-    private Unit CurrPlayer;
+    private Player CurrPlayer;
     private List<Enemy> EnemyList;
+    private List<Unit> Listeners;
     private boolean PlayerAlive;
     private Creator BoardCreator;
     private List<String> Output;
@@ -26,6 +27,8 @@ public class Board {
         this.Output = new ArrayList<String>();
         this.EnemyList = new ArrayList<Enemy>();
         playerselection=BoardCreator.PlayerSelection();
+        this.Listeners = new ArrayList<Unit>();
+        this.SubscribeListener(this.CurrPlayer); //subscribing current player to Listener pattern logic
     }
     
     public String playerselection(){ return playerselection;}
@@ -33,7 +36,8 @@ public class Board {
     public void crateBoard(String [][] level, int playerChoice) {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
         EnemyList = BoardCreator.getEnemyList();
-        CurrPlayer=BoardCreator.getCurrPlayer();
+        CurrPlayer = BoardCreator.getCurrPlayer();
+        for(Enemy e : this.EnemyList) this.SubscribeListener(e); //subscribing the enemies to Listener pattern logic
     }
     
     public Unit getCurrPlayer(){ return CurrPlayer;}
@@ -77,13 +81,12 @@ public class Board {
         if (!this.PlayerAlive) this.Output.add(this.CurrPlayer.Name+" was killed by " + attacker.Name+". \nYou lost.");
         else if(!defender.ActualStatus){
             this.Output.add(defender.Name + " died. "+attacker.Name+" gained "+ defender.Experience +" experience.");
-            //this.Output.AddAll(this.CurrPlayer.updateExperience(defender.Experience)); => updateExperience returns List<String>
+            this.CurrPlayer.updateExperience(defender.Experience, this.Output);// => updateExperience returns List<String>
         }
     }
 
 
     private void Action (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
-        //output.add (currPlayer.SpecialAbility);
         List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
         int attack = currPlayer.applySpecialAbility(enemiesToAttack, this.Output); //both lists are updated in player class itself
         for(Enemy e : enemiesToAttack) {
@@ -99,7 +102,6 @@ public class Board {
                 currPlayer.updateExperience(e.Experience, this.Output);// => updateExperience returns List<String>
             }
         }
-        
     }
 
     private void Action (Unit currCharacter, Empty tile) { //  ==>  in case of movement
@@ -135,11 +137,15 @@ public class Board {
    }
 
     private void updateActualStatus() { //observer pattern update method => all the listeners update their actualStatus (= alive/dead (=true/false))
-        throw new UnsupportedOperationException();
+        for(Unit u : this.Listeners) u.update();
     }
 
     private void updateGameTick() { //observer pattern update method => all the listeners update their tickDepended fields (for exmp. Warrior's cooldown)
         throw new UnsupportedOperationException();
+    }
+
+    public void SubscribeListener(Unit toRegister){
+        this.Listeners.add(toRegister);
     }
 
     //combatResultMethod that adds strings to output in the end of an combat action (specialAbility or combat)

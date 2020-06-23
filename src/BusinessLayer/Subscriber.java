@@ -1,5 +1,7 @@
 package BusinessLayer;
 
 public interface Subscriber {
-    public void update(Object context);
+    public void updateActualStatus();
+    public void updateGameTick();
+
 }

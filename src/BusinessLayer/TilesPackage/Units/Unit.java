@@ -15,7 +15,7 @@ public abstract class Unit extends Tile implements Subscriber {
     public String Name;
     public Integer HealthPool; //maximum health
     public Integer HealthAmount; //current health
-    public Integer Health; // get\set?????
+    public Integer Health; // get\set?????   do we need it at all????????????????
     public Integer AttackPoints;
     public Integer DefensePoints;
     public boolean ActualStatus;
@@ -45,8 +45,16 @@ public abstract class Unit extends Tile implements Subscriber {
     //abstract
 
     @Override
-    public void update(Object context) {
+    public void updateActualStatus() {
+        if (this.HealthAmount <= 0) this.ActualStatus = false;
     }
+
+    @Override
+    public void updateGameTick() {
+        //insert here actions per tick of current character (player / enemy)
+    }
+
+
 
     public abstract String status();
 }

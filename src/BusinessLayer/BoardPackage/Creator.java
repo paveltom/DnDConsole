@@ -7,6 +7,7 @@ import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Enemies.Monster;
 import BusinessLayer.TilesPackage.Units.Enemies.Trap;
 import BusinessLayer.TilesPackage.Units.Players.Mage;
+import BusinessLayer.TilesPackage.Units.Players.Player;
 import BusinessLayer.TilesPackage.Units.Players.Rogue;
 import BusinessLayer.TilesPackage.Units.Players.Warrior;
 import BusinessLayer.TilesPackage.Units.Unit;
@@ -45,7 +46,7 @@ public class Creator {
     private final String[] death_trap ={t,"Death Trap","1","1","1","250","1","10"};
     private Map<String,String[][]> CharactersDataBase;
     private List<Enemy> EnemyList;
-    private Unit CurrPlayer;
+    private Player CurrPlayer;
     private Tile [][] board;
     private String playerSelection = "Select Player:" + '\n';
     private int ExpD=0;
@@ -89,7 +90,7 @@ public class Creator {
         return output;
     }
     public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
-    public Unit getCurrPlayer(){return CurrPlayer;}
+    public Player getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()
     {
         int i=1;
