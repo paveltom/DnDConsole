@@ -11,7 +11,7 @@ public class Mage extends Player {
     public Mage(String[][] boardData, int x, int y, String s) {
         super(boardData, x, y,s.charAt(0));
         manapool=Integer.parseInt(boardData[1][5]);
-        curmana=manacost;
+        curmana=manapool/4;
         manacost=Integer.parseInt(boardData[1][6]);
         spellpower=Integer.parseInt(boardData[1][7]);
         hitcount=Integer.parseInt(boardData[1][8]);
@@ -47,8 +47,8 @@ public class Mage extends Player {
         }
     }
     @Override
-    public String toString ()
+    public String status ()
     {
-        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Mana: "+curmana+"/"+manapool;
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Mana: "+manapool/4+"/"+manapool;
     }
 }
