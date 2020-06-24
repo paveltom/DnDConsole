@@ -17,8 +17,8 @@ public class Board {
     private boolean PlayerAlive;
     private Creator BoardCreator;
     private List<String> Output;
-    private String playerselection;  //????????????????????
-    private boolean tickcheck = false; //?????????????????????????????
+    private String PlayerSelection;  //String of characters' selection options
+    private boolean TickCheck = false; //?????????????????????????????
 
 
     public Board() {
@@ -26,12 +26,12 @@ public class Board {
         this.CurrBoard = new Tile[0][];
         this.Output = new ArrayList<String>();
         this.EnemyList = new ArrayList<Enemy>();
-        playerselection=BoardCreator.PlayerSelection();
+        this.PlayerSelection = BoardCreator.PlayerSelection();
         this.Listeners = new ArrayList<Unit>();
         this.SubscribeListener(this.CurrPlayer); //subscribing current player to Listener pattern logic
     }
     
-    public String playerselection(){ return playerselection;}
+    public String getPlayerSelection(){ return PlayerSelection;}
     
     public void crateBoard(String [][] level, int playerChoice) {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
@@ -42,24 +42,28 @@ public class Board {
     
     public Unit getCurrPlayer(){ return CurrPlayer;}
     
-    public void gameTick(String userInput)
+    public List<String> gameTick(String userInput)
     {
-        /*
-        if (!userInput.Equals("q")){  //filtrate nonAction choice ==>  but there is a need to perform the perTick updates
-            Tile toMoveTo = player.ActionPerTick(userInput);
-            this.Action(player, toMoveTo);
+        //         dont forget to clear the Output list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        if(!userInput.equals("q")) {
+            this.Action(this.CurrPlayer, this.CurrPlayer.ActionPerTick(userInput));
         }
 
-        foreach(){
-               if(current is dead) = > remove from list
-               if(player is dead) = > break the game + return current output list
+        for(Enemy e : this.EnemyList){
+
         }
 
+//        foreach(){
+//               if(current is dead) = > remove from list
+//               if(player is dead) = > break the game + return current output list
+//        }
 
+        //add board print to output
+        //
 
-
-         dont forget to clear the Output list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         */
+        this.updateGameTick();
+        return this.Output;
     }
 
 
@@ -67,22 +71,34 @@ public class Board {
     private void Action(Tile t1, Tile t2) { // ==>  for overloading purposes
     }
 
+    private void Action (Unit currCharacter, Wall tile){ // ==> doesn't move
+
+    }
+
+
+    private void Action (Enemy e1, Enemy e2) { // => in case enemy meets enemy
+
+    }
+
     private void Action (Unit attacker, Unit defender) {
+        this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
         this.attackDefend(attacker, defender);
         this.updateActualStatus(); //observer pattern update method
-
-        this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
         this.Output.add(attacker.actualStats());
         this.Output.add(defender.actualStats());
-        //attack / defend string are added in this.attackDefend method
+        // attack\defend string are added in this.attackDefend method
 
         this.PlayerAlive = this.CurrPlayer.ActualStatus;
 
-        if (!this.PlayerAlive) this.Output.add(this.CurrPlayer.Name+" was killed by " + attacker.Name+". \nYou lost.");
+        if (!this.PlayerAlive){
+            this.Output.add(this.CurrPlayer.Name+" was killed by " + attacker.Name+". \nYou lost.");
+            this.CurrPlayer.TileSymbol = 'X';
+        }
         else if(!defender.ActualStatus){
             this.Output.add(defender.Name + " died. "+attacker.Name+" gained "+ defender.Experience +" experience.");
             this.CurrPlayer.updateExperience(defender.Experience, this.Output);// => updateExperience returns List<String>
         }
+        //add exchange of places in case of dying
     }
 
 
@@ -115,10 +131,6 @@ public class Board {
         tile.getPosition().setPosition(columnToLeave, rowToLeave);
     }
 
-    private void Action (Unit currCharacter, Wall tile){ // ==> doesn't move
-        
-    }
-
     private void attackDefend (Unit attacker, Unit defender){
         int attack = randomize(attacker.AttackPoints);
         int defend = randomize(defender.DefensePoints);
@@ -131,21 +143,25 @@ public class Board {
     }
 
 
-   private int randomize(int bound){
-        throw new UnsupportedOperationException();
-        //return Math.Random(up to bound)
+   private int randomize(int bound) {
+       int rand = (int) (Math.random() * bound) + 1; // maybe it is possible to avoid this casting
+       return rand;
    }
 
     private void updateActualStatus() { //observer pattern update method => all the listeners update their actualStatus (= alive/dead (=true/false))
-        for(Unit u : this.Listeners) u.update();
+        for(Unit u : this.Listeners) u.updateActualStatus();
     }
 
     private void updateGameTick() { //observer pattern update method => all the listeners update their tickDepended fields (for exmp. Warrior's cooldown)
-        throw new UnsupportedOperationException();
+        for(Unit u : this.Listeners) u.updateGameTick();
     }
 
-    public void SubscribeListener(Unit toRegister){
-        this.Listeners.add(toRegister);
+    public void SubscribeListener(Unit toSubscribe){
+        this.Listeners.add(toSubscribe);
+    }
+
+    public void UnsubscribeListener(Unit toUnsubscribe){
+        this.Listeners.add(toUnsubscribe);
     }
 
     //combatResultMethod that adds strings to output in the end of an combat action (specialAbility or combat)

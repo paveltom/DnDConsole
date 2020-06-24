@@ -29,6 +29,8 @@ public abstract class Unit extends Tile implements Subscriber {
         this.DefensePoints = Integer.parseInt(p[1][4]);
     }
 
+    public abstract Tile ActionPerTick(String userInput);
+
     //updateStatus - listener pattern
     //updateTick
 
