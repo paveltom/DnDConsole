@@ -44,8 +44,7 @@ public class Board {
     
     public List<String> gameTick(String userInput)
     {
-        //         dont forget to clear the Output list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        this.Output.clear();
         if(!userInput.equals("q")) {
             Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
             Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
@@ -55,19 +54,12 @@ public class Board {
         for(Enemy e : this.EnemyList){
             e.actionPerTick(this.CurrPlayer.getPosition());
             if (!this.PlayerAlive){
-//                this.Output.add(board.tostring)
+                this.Output.add(this.toString());
                 return this.Output;
             }
         }
 
-//        foreach(){
-//               if(current is dead) = > remove from list
-//               if(player is dead) = > break the game + return current output list
-//        }
-
-        //add board print to output
-        //
-
+        this.Output.add(this.toString());
         this.updateGameTick();
         return this.Output;
     }
