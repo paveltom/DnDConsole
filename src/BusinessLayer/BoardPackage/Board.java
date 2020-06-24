@@ -46,21 +46,22 @@ public class Board {
     {
         this.Output.clear();
         if(!userInput.equals("q")) {
+            //make sure that inner actionPerTick method does not returns an illegal position (for exmp. [-1][-1])
             Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
             Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
             this.Action(this.CurrPlayer, userActionTile);
         }
 
         for(Enemy e : this.EnemyList){
-            e.actionPerTick(this.CurrPlayer.getPosition());
-            if (!this.PlayerAlive){
-                this.Output.add(this.toString());
-                return this.Output;
-            }
+            Coordinate enemyActionCoordinate = e.actionPerTick(this.CurrPlayer.getPosition());
+            Tile enemyActionTile = this.CurrBoard[enemyActionCoordinate.getRowCoordinate()][enemyActionCoordinate.getColumnCoordinate()];
+            this.Action(e, enemyActionTile);
+            if (!this.PlayerAlive) break;
         }
 
         this.Output.add(this.toString());
-        this.updateGameTick();
+        this.Output.add(this.CurrPlayer.actualStats());
+        this.updateGameTick(); //add to every Player's action method an boolean statement that validates player is alive + make sure this call does not adding any string to this.Output
         return this.Output;
     }
 
@@ -80,11 +81,11 @@ public class Board {
 
     private void Action (Unit attacker, Unit defender) {
         this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
-        this.attackDefend(attacker, defender);
-        this.updateActualStatus(); //observer pattern update method
         this.Output.add(attacker.actualStats());
         this.Output.add(defender.actualStats());
-        // attack\defend string are added in this.attackDefend method
+        this.attackDefend(attacker, defender); // attack\defend string are added in this.attackDefend method
+
+        this.updateActualStatus(); //observer pattern update method
 
         this.PlayerAlive = this.CurrPlayer.ActualStatus;
 
@@ -95,6 +96,11 @@ public class Board {
         else if(!defender.ActualStatus){
             this.Output.add(defender.Name + " died. "+attacker.Name+" gained "+ defender.Experience +" experience.");
             this.CurrPlayer.updateExperience(defender.Experience, this.Output);// => updateExperience returns List<String>
+            this.EnemyList.remove(defender);
+            //defender changes to empty and sended to action of movement
+            int x = defender.getPosition().getColumnCoordinate();
+            int y = defender.getPosition().getRowCoordinate();
+            this.CurrBoard[y][x] = new Empty(x, y);
         }
         //add exchange of places in case of dying
     }
