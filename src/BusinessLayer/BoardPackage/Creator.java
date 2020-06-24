@@ -77,15 +77,14 @@ public class Creator {
         setEmpty();
         setWall();
     }
-    public String toString()
-    {
-        String output="";
-        for(int a=0;a<board.length;a++) {
+    public String toString() { //also exists in Board class. Remove from here.
+        String output = "";
+        for (int a = 0; a < board.length; a++) {
             for (int j = 0; j < board[a].length; j++) {
                 Tile temp = board[a][j];
-                output+=temp.Toboard();
+                output += temp.toString();
             }
-            output+='\n';
+            output += '\n';
         }
         return output;
     }

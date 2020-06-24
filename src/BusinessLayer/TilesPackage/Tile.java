@@ -17,8 +17,7 @@ public class Tile {
         return Position;
     }
 
-
-    public String Toboard() {
+    public String toString() {
         return TileSymbol + "";
     }
 

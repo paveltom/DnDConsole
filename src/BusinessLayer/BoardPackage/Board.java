@@ -53,7 +53,11 @@ public class Board {
         }
 
         for(Enemy e : this.EnemyList){
-            e.actionPerTick()
+            e.actionPerTick(this.CurrPlayer.getPosition());
+            if (!this.PlayerAlive){
+//                this.Output.add(board.tostring)
+                return this.Output;
+            }
         }
 
 //        foreach(){
@@ -145,6 +149,19 @@ public class Board {
     }
 
 
+    public String toString() { //also exists in Board class. Remove from here.
+        String output = "";
+        for (int a = 0; a < this.CurrBoard.length; a++) {
+            for (int j = 0; j < this.CurrBoard[a].length; j++) {
+                Tile temp = this.CurrBoard[a][j];
+                output += temp.toString();
+            }
+            output += '\n';
+        }
+        return output;
+    }
+
+
    private int randomize(int bound) {
        int rand = (int) (Math.random() * bound) + 1; // maybe it is possible to avoid this casting
        return rand;
@@ -175,139 +192,86 @@ public class Board {
 
 
 
+//    public void PlayerTick(String s) throws Exception {
+//        if(s!="e") {
+//            if (s == "d")
+//                checkRightTile();
+//            else if (s == "a")
+//                checkLeftTile();
+//            else if (s == "s")
+//                checkDownTile();
+//            else if (s == "w")
+//                checkUPTile();
+//            if(!tickcheck)
+//                throw new Exception();
+//            tickcheck=false;
+//        }
+//        /////// special ability!!!!!!
+//    }
+//
+//
+//    public void checkRightTile()
+//    {
+//        Coordinate temp = CurrPlayer.getPosition();
+//        int y=temp.getRowCoordinate();
+//        int x=temp.getolumnCoordinate();
+//        if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
+//            if (CurrBoard[x][y + 1].ToString().equals("."))///////////////////////////////////
+//            {
+//                Tile change = CurrBoard[x][y + 1];
+//                CurrBoard[x][y + 1] = CurrBoard[x][y];
+//                CurrBoard[x][y] = change;
+//            } else Combat(CurrPlayer,"R");
+//        }
+//        tickcheck=true;
+//    }
+//    public void checkLeftTile()
+//    {
+//        Coordinate temp = CurrPlayer.getPosition();
+//        int y=temp.getRowCoordinate();
+//        int x=temp.getolumnCoordinate();
+//        if(!(CurrBoard[x][y-1].ToString().equals("#"))) {
+//            if (CurrBoard[x][y - 1].ToString().equals("."))/////////////////////////////////////
+//            {
+//                Tile change = CurrBoard[x][y - 1];
+//                CurrBoard[x][y - 1] = CurrBoard[x][y];
+//                CurrBoard[x][y] = change;
+//            } else Combat(CurrPlayer,"L");
+//        }
+//        tickcheck=true;
+//    }
+//    public void checkDownTile()
+//    {
+//        Coordinate temp = CurrPlayer.getPosition();
+//        int y=temp.getRowCoordinate();
+//        int x=temp.getolumnCoordinate();
+//        if(!(CurrBoard[x-1][y].ToString().equals("#"))) {
+//            if (CurrBoard[x-1][y].ToString().equals("."))/////////////////////////////////////
+//            {
+//                Tile change = CurrBoard[x][y - 1];
+//                CurrBoard[x-1][y] = CurrBoard[x][y];
+//                CurrBoard[x][y] = change;
+//            }else Combat(CurrPlayer,"D");
+//        }
+//        tickcheck=true;
+//    }
+//    public void checkUPTile()
+//    {
+//        Coordinate temp = CurrPlayer.getPosition();
+//        int y=temp.getRowCoordinate();
+//        int x=temp.getolumnCoordinate();
+//        if(!(CurrBoard[x+1][y].ToString().equals("#"))) {
+//            if (CurrBoard[x+1][y].ToString().equals("."))/////////////////////////////////////
+//            {
+//                Tile change = CurrBoard[x+1][y];
+//                CurrBoard[x+1][y] = CurrBoard[x][y];
+//                CurrBoard[x][y] = change;
+//            }
+//            else Combat(CurrPlayer,"U");
+//        }
+//        tickcheck=true;
+//    }
+//    private void Combat(Tile A,String derc){}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void PlayerTick(String s) throws Exception {
-        if(s!="e") {
-            if (s == "d")
-                checkRightTile();
-            else if (s == "a")
-                checkLeftTile();
-            else if (s == "s")
-                checkDownTile();
-            else if (s == "w")
-                checkUPTile();
-            if(!tickcheck)
-                throw new Exception();
-            tickcheck=false;
-        }
-        /////// special ability!!!!!!
-    }
-
-
-    public void checkRightTile()
-    {
-        Coordinate temp = CurrPlayer.getPosition();
-        int y=temp.getRowCoordinate();
-        int x=temp.getolumnCoordinate();
-        if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
-            if (CurrBoard[x][y + 1].ToString().equals("."))///////////////////////////////////
-            {
-                Tile change = CurrBoard[x][y + 1];
-                CurrBoard[x][y + 1] = CurrBoard[x][y];
-                CurrBoard[x][y] = change;
-            } else Combat(CurrPlayer,"R");
-        }
-        tickcheck=true;
-    }
-    public void checkLeftTile()
-    {
-        Coordinate temp = CurrPlayer.getPosition();
-        int y=temp.getRowCoordinate();
-        int x=temp.getolumnCoordinate();
-        if(!(CurrBoard[x][y-1].ToString().equals("#"))) {
-            if (CurrBoard[x][y - 1].ToString().equals("."))/////////////////////////////////////
-            {
-                Tile change = CurrBoard[x][y - 1];
-                CurrBoard[x][y - 1] = CurrBoard[x][y];
-                CurrBoard[x][y] = change;
-            } else Combat(CurrPlayer,"L");
-        }
-        tickcheck=true;
-    }
-    public void checkDownTile()
-    {
-        Coordinate temp = CurrPlayer.getPosition();
-        int y=temp.getRowCoordinate();
-        int x=temp.getolumnCoordinate();
-        if(!(CurrBoard[x-1][y].ToString().equals("#"))) {
-            if (CurrBoard[x-1][y].ToString().equals("."))/////////////////////////////////////
-            {
-                Tile change = CurrBoard[x][y - 1];
-                CurrBoard[x-1][y] = CurrBoard[x][y];
-                CurrBoard[x][y] = change;
-            }else Combat(CurrPlayer,"D");
-        }
-        tickcheck=true;
-    }
-    public void checkUPTile()
-    {
-        Coordinate temp = CurrPlayer.getPosition();
-        int y=temp.getRowCoordinate();
-        int x=temp.getolumnCoordinate();
-        if(!(CurrBoard[x+1][y].ToString().equals("#"))) {
-            if (CurrBoard[x+1][y].ToString().equals("."))/////////////////////////////////////
-            {
-                Tile change = CurrBoard[x+1][y];
-                CurrBoard[x+1][y] = CurrBoard[x][y];
-                CurrBoard[x][y] = change;
-            }
-            else Combat(CurrPlayer,"U");
-        }
-        tickcheck=true;
-    }
-    private void Combat(Tile A,String derc){}
 }

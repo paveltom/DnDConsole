@@ -27,7 +27,7 @@ public class Trap extends Enemy {
     //toString: if visible return 'B'\'Q'\'D', else return '.'
 
     @Override
-    public Coordinate actionPerTick() {
+    public Coordinate actionPerTick(Object currentUserPositionCoordinate) {
         if(tick_count==(visibility_time+invisibility_time))
             tick_count=0;
         else tick_count++;

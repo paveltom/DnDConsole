@@ -37,8 +37,9 @@ public class Monster extends Enemy {
         else return "K";
     }
     public int getVision_range(){return vision_range;}
+
     @Override
-    public Coordinate actionPerTick() {
+    public Coordinate actionPerTick(Object currentUserPositionCoordinate) {
         return null;
     }
     @Override
