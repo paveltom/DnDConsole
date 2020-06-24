@@ -29,7 +29,6 @@ public abstract class Unit extends Tile implements Subscriber {
         this.DefensePoints = Integer.parseInt(p[1][4]);
     }
 
-    public abstract Tile ActionPerTick(String userInput);
 
     //updateStatus - listener pattern
     //updateTick
@@ -41,7 +40,7 @@ public abstract class Unit extends Tile implements Subscriber {
     public abstract String actualStats();
 
     //public abstract Coordinate actionPerTick(String s);
-    public abstract Coordinate actionPerTick();//??????????????do we need it?
+    public abstract Coordinate actionPerTick(Object obj);//??????????????do we need it?
 
     //abstract move
     //abstract

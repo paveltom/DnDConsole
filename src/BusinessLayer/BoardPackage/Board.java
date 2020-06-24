@@ -47,11 +47,13 @@ public class Board {
         //         dont forget to clear the Output list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if(!userInput.equals("q")) {
-            this.Action(this.CurrPlayer, this.CurrPlayer.ActionPerTick(userInput));
+            Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
+            Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
+            this.Action(this.CurrPlayer, userActionTile);
         }
 
         for(Enemy e : this.EnemyList){
-
+            e.actionPerTick()
         }
 
 //        foreach(){

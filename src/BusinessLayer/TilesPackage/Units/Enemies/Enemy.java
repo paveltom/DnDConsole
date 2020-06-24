@@ -17,7 +17,7 @@ public class Enemy extends Unit {
     }
 
     @Override
-    public Coordinate actionPerTick() {
+    public Coordinate actionPerTick(Object currUserPosition) {
         return null;
     }
 

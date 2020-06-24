@@ -38,7 +38,7 @@ public class Player extends Unit {
     //updatePosition
 
     @Override
-    public Coordinate actionPerTick(){
+    public Coordinate actionPerTick(Object userInput){
         throw new UnsupportedOperationException();
     }
 
