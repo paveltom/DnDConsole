@@ -27,7 +27,7 @@ public class Warrior extends Player {
         }
     }
     @Override
-    public String status()
+    public String actualStats()
     {
         return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Level: "+Level+'\n'+"Experience: "+Experience+"/"+50+"  Cooldown: "+coolDowncaunter+"/"+coolDown;
     }

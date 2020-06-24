@@ -70,7 +70,7 @@ public class Main {
                 System.out.print(level[a][j]);
             System.out.println();
         }
-        String temp =t.status();
+        String temp =t.actualStats();
         System.out.println(temp);
     }
 }

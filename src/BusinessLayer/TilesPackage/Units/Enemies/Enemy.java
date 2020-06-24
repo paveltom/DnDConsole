@@ -21,8 +21,4 @@ public class Enemy extends Unit {
         return null;
     }
 
-    @Override
-    public String status() {
-        return null;
-    }
 }

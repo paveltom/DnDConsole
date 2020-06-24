@@ -34,7 +34,7 @@ public class Trap extends Enemy {
         return null;
     }
     @Override
-    public String status()
+    public String actualStats()
     {
         return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+experience_value;
     }

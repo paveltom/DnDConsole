@@ -43,11 +43,6 @@ public class Player extends Unit {
     }
 
     @Override
-    public String status() {
-        return null;
-    }
-
-    @Override
     public String actualStats() {
         throw new UnsupportedOperationException();
     }

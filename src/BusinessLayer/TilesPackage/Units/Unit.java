@@ -55,7 +55,4 @@ public abstract class Unit extends Tile implements Subscriber {
         //insert here actions per tick of current character (player / enemy)
     }
 
-
-
-    public abstract String status();
 }
