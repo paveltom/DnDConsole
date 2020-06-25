@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
+
     private Tile[][] CurrBoard;
     private Player CurrPlayer;
     private List<Enemy> EnemyList;
@@ -46,7 +47,6 @@ public class Board {
     {
         this.Output.clear();
         if(!userInput.equals("q")) {
-            //make sure that inner actionPerTick method does not returns an illegal position (for exmp. [-1][-1])
             Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
             Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
             this.Action(this.CurrPlayer, userActionTile);
@@ -97,12 +97,13 @@ public class Board {
             this.Output.add(defender.Name + " died. "+attacker.Name+" gained "+ defender.Experience +" experience.");
             this.CurrPlayer.updateExperience(defender.Experience, this.Output);// => updateExperience returns List<String>
             this.EnemyList.remove(defender);
-            //defender changes to empty and sended to action of movement
+            this.UnsubscribeListener(defender);
             int x = defender.getPosition().getColumnCoordinate();
             int y = defender.getPosition().getRowCoordinate();
-            this.CurrBoard[y][x] = new Empty(x, y);
+            Empty deadEnemy = new Empty(x, y);//defender changes to empty and sended to action of movement
+            this.CurrBoard[y][x] = deadEnemy;
+            this.Action(this.CurrPlayer, deadEnemy);
         }
-        //add exchange of places in case of dying
     }
 
 
@@ -120,6 +121,7 @@ public class Board {
             if (!e.ActualStatus) {
                 this.Output.add(e.Name + " died. " + currPlayer.Name + " gained " + e.Experience + " experience.");
                 currPlayer.updateExperience(e.Experience, this.Output);// => updateExperience returns List<String>
+                this.UnsubscribeListener(e);
             }
         }
     }

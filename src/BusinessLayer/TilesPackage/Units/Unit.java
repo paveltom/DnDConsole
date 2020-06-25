@@ -39,8 +39,10 @@ public abstract class Unit extends Tile implements Subscriber {
 
     public abstract String actualStats();
 
-    //public abstract Coordinate actionPerTick(String s);
-    public abstract Coordinate actionPerTick(Object obj);//??????????????do we need it?
+    public abstract Coordinate actionPerTick(String s);
+
+    public abstract Coordinate actionPerTick(Coordinate c);
+
 
     //abstract move
     //abstract
@@ -51,8 +53,6 @@ public abstract class Unit extends Tile implements Subscriber {
     }
 
     @Override
-    public void updateGameTick() {
-        //insert here actions per tick of current character (player / enemy)
-    }
+    public abstract void updateGameTick();
 
 }

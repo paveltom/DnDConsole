@@ -5,7 +5,7 @@ import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Unit;
 import java.util.List;
 
-public class Player extends Unit {
+public abstract class Player extends Unit {
 
     public Integer Level;
 
@@ -25,26 +25,43 @@ public class Player extends Unit {
         this.DefensePoints = this.DefensePoints + this.Level;
     }
 
-    public int applySpecialAbility(List<Enemy> enemies, List<String> output){ //returns the damage that will be caused to randomly (depends on players class) chosen enemies
-        //special ability logic and prints
-        throw new UnsupportedOperationException();
-    }
+    public abstract int applySpecialAbility(List<Enemy> enemies, List<String> output); //returns the damage that will be caused to randomly (depends on players class) chosen enemies
+
 
     public void updateExperience(int experience, List<String> output){
-
+        this.Experience = this.Experience+experience; //override with LevelUp statement in each player.Class
     }
 
 
     //updatePosition
 
     @Override
-    public Coordinate actionPerTick(Object userInput){
-        throw new UnsupportedOperationException();
+    public Coordinate actionPerTick(String userInput){
+        int x = this.Position.getColumnCoordinate();
+        int y = this.Position.getRowCoordinate();
+        switch (userInput) {
+            case "w":
+                return new Coordinate(x, y+1);
+            case "a":
+                return new Coordinate(x-1, y);
+            case "s":
+                return new Coordinate(x, y-1);
+            case "d":
+                return new Coordinate(x+1, y);
+            default:
+                return new Coordinate(x, y);
+        }
+    }
+
+    @Override
+    public Coordinate actionPerTick(Coordinate c){
+        return new Coordinate(-1,-1);
     }
 
     @Override
     public String actualStats() {
         throw new UnsupportedOperationException();
     }
+
 
 }
