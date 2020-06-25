@@ -43,6 +43,11 @@ public abstract class Unit extends Tile implements Subscriber {
 
     public abstract Coordinate actionPerTick(Coordinate c);
 
+    public int range(Coordinate c1, Coordinate c2) {
+        Double result = Math.sqrt(Math.pow((c1.getColumnCoordinate() - c2.getColumnCoordinate()), 2) + Math.pow((c1.getRowCoordinate() - c2.getRowCoordinate()), 2));
+        return result.intValue();
+    }
+
 
     //abstract move
     //abstract
