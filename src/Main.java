@@ -8,6 +8,7 @@ import BusinessLayer.TilesPackage.Units.Players.Mage;
 import BusinessLayer.TilesPackage.Units.Players.Player;
 import BusinessLayer.TilesPackage.Units.Players.Warrior;
 import BusinessLayer.TilesPackage.Units.Unit;
+import ServiceLayer.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,27 +51,39 @@ public class Main {
         return level;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scan = new Scanner(System.in);
-        Board b = new Board();
-        String [][] level =readfile(args);
-        System.out.println(b.getPlayerSelection());
-        String p = "";
-        while (p == "") {
-            p = scan.nextLine();
-            if (!(p.compareTo("0") > 0 & p.compareTo("7") < 0)) {
-                System.out.println("Select a player according to numbers 1 to 6");
-                p = "";
-            }
-        }
-        b.crateBoard(level,Integer.parseInt(p));
-        Unit t = b.getCurrPlayer();
-        System.out.println("You Selected:"+'\n'+t.Name);
-        for(int a=0;a<level.length;a++) {
-            for (int j = 0; j < level[a].length; j++)
-                System.out.print(level[a][j]);
-            System.out.println();
-        }
-        String temp =t.actualStats();
-        System.out.println(temp);
+//        Scanner scan = new Scanner(System.in);
+//        Board b = new Board();
+//        String [][] level =readfile(args);
+//        System.out.println(b.getPlayerSelection());
+//        String p = "";
+//        while (p == "") {
+//            p = scan.nextLine();
+//            if (!(p.compareTo("0") > 0 & p.compareTo("7") < 0)) {
+//                System.out.println("Select a player according to numbers 1 to 6");
+//                p = "";
+//            }
+//        }
+//        b.crateBoard(level,Integer.parseInt(p));
+//        Unit t = b.getCurrPlayer();
+//        System.out.println("You Selected:"+'\n'+b.getCurrPlayer().Name);
+//        for(int a=0;a<level.length;a++) {
+//            for (int j = 0; j < level[a].length; j++)
+//                System.out.print(level[a][j]);
+//            System.out.println();
+//        }
+//        //String temp =t.actualStats();
+//        System.out.println(b.getCurrPlayer().actualStats());
+//        p="";
+//        while (p == "") {
+//            p = scan.nextLine();
+//            if (!(p.equals("w") |p.equals("s")|p.equals("a")|p.equals("d")|p.equals("e")|p.equals("q"))) {
+//                System.out.println("Select a valid actin or movement command");
+//                p = "";
+//            }
+//        }
+//        b.gameTick(p);
+        service s = new service();
+        s.newgame(args);
+        s.newgame(args);
     }
 }
