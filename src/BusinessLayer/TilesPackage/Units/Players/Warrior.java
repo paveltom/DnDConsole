@@ -18,6 +18,7 @@ public class Warrior extends Player {
     @Override
     public int applySpecialAbility(List<Enemy> enemies, List<String> output) {
         if (coolDownCounter > 0) {
+            enemies.clear();
             output.add(this.Name + " tried to cast Avenger's Shield, but there is a remaining cooldown: " + this.coolDownCounter + ".");
             return 0;
         }
