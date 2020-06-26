@@ -41,7 +41,10 @@ public class Board {
         for(Enemy e : this.EnemyList) this.SubscribeListener(e); //subscribing the enemies to Listener pattern logic
     }
     
-    public Unit getCurrPlayer(){ return CurrPlayer;}
+    public Player getCurrPlayer(){ return CurrPlayer;}
+    public boolean PlayerAlive(){ return PlayerAlive;}
+    public int getEnemySize(){ return EnemyList.size();}
+    public void setCurrPlayer(Player updatepalyer){ this.CurrPlayer=updatepalyer;}
     
     public List<String> gameTick(String userInput)
     {

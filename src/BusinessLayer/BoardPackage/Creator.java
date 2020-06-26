@@ -124,10 +124,10 @@ public class Creator {
     public Tile [][] createBoard(String[][] level,int p)
     {
         board =new Tile[level.length][];
-        Tile[] temp;
+        Tile[] Currline;
         for(int i=0;i<level.length;i++)
         {
-            temp=new Tile[level[i].length];
+            Currline=new Tile[level[i].length];
             for(int j=0;j<level[i].length;j++)
             {
                 String type;
@@ -138,37 +138,37 @@ public class Creator {
                     type = curr[1][0];
                     if (type.equals("Warrior")) {
                         CurrPlayer = new Warrior(curr, j, i,level[i][j]);
-                        temp[j]=CurrPlayer;
+                        Currline[j]=CurrPlayer;
                     }
                     else if (type.equals("Mage")) {
                         CurrPlayer = new Mage(curr, j, i,level[i][j]);
-                        temp[j]=CurrPlayer;
+                        Currline[j]=CurrPlayer;
                     }
                     else if (type.equals("Rogue")) {
                         CurrPlayer = new Rogue(curr, j, i,level[i][j]);
-                        temp[j]=CurrPlayer;
+                        Currline[j]=CurrPlayer;
                     }
                 }
                 else {
                     curr = CharactersDataBase.get(level[i][j]);
                     type = curr[1][0];
                     if (type.equals("Empty"))
-                        temp[j] = new Empty(j,i);
+                        Currline[j] = new Empty(j,i);
                     else if (type.equals("Wall"))
-                        temp[j] = new Wall(j,i);
+                        Currline[j] = new Wall(j,i);
                     else if (type.equals("Trap")) {
                         Enemy t= new Trap(curr,j,i,level[i][j]);
                         EnemyList.add(t);
-                        temp[j] = t;
+                        Currline[j] = t;
                     }
                     else if (type.equals("Monster")) {
                         Enemy m = new Monster(curr,j,i,level[i][j]);
                         EnemyList.add(m);
-                        temp[j]=m;
+                        Currline[j]=m;
                     }
                 }
             }
-            board[i]=temp;
+            board[i]=Currline;
         }
         return board;
     }

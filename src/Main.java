@@ -84,6 +84,5 @@ public class Main {
 //        b.gameTick(p);
         service s = new service();
         s.newgame(args);
-        s.newgame(args);
     }
 }
