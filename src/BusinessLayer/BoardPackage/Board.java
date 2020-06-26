@@ -119,7 +119,7 @@ public class Board {
             if (diff < 0) diff = 0;
             e.HealthAmount = e.HealthAmount - diff;
             this.Output.add(e.Name + " rolled " + defend + " defense points.");
-            this.Output.add(currPlayer.Name + " dealt " + diff + " damage to "+e.Name+".");
+            this.Output.add(currPlayer.Name + " dealt " + diff + " damage to "+e.Name+"."); //maybe change the message to 'hit' so it'll be different from combat message
             this.updateActualStatus(); //observer pattern update method
             if (!e.ActualStatus) {
                 this.Output.add(e.Name + " died. " + currPlayer.Name + " gained " + e.Experience + " experience.");

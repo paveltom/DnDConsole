@@ -15,6 +15,7 @@ public class Warrior extends Player {
         coolDownCounter = 0;
     }
 
+
     @Override
     public int applySpecialAbility(List<Enemy> enemies, List<String> output) {
         if (coolDownCounter > 0) {
@@ -26,7 +27,7 @@ public class Warrior extends Player {
         this.coolDownCounter = this.coolDown;
         this.HealthAmount = Math.min(this.HealthAmount + (this.DefensePoints * 10), this.HealthPool);
 
-        for (Enemy e : enemies){
+        for (Enemy e : enemies){ //sorting the 'enemies' so only the Enemies in the range of 3 will not be removed
             if (!(super.range(this.Position, e.Position) < 3)) enemies.remove(e);
         }
         int index = (int) (Math.random() * enemies.size());
@@ -38,11 +39,13 @@ public class Warrior extends Player {
         return this.HealthPool / 10;
     }
 
+
     @Override
     public void updateExperience(int experience, List<String> output) {
         super.updateExperience(experience, output);
         if (this.Experience >= 50 * this.Level) this.LevelUP(output);
     }
+
 
     public void LevelUP(List<String> output) {
         int health = this.HealthPool;
@@ -57,13 +60,15 @@ public class Warrior extends Player {
         this.DefensePoints = this.DefensePoints + this.Level;
 
         output.add(this.Name + " reached level " + this.Level + ": +" + (this.HealthPool - health) + " Health, +" + (this.AttackPoints - attack) +
-                " Attack, +" + (this.DefensePoints - defense) + " Defense.");
+                " Attack, +" + (this.DefensePoints - defense) + " Defense."); //make sure it is printable in appropriate way in Console
     }
+
 
     @Override
     public void updateGameTick() {
         if (coolDownCounter > 0) coolDownCounter = coolDownCounter - 1;
     }
+
 
     @Override
     public String actualStats() {

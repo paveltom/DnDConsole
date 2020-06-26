@@ -23,6 +23,7 @@ public class Mage extends Player {
         abilityRange = Integer.parseInt(boardData[1][9]);
     }
 
+
     public void LevelUP(List<String> output) {
         int health = this.HealthPool;
         int attack = this.AttackPoints;
@@ -38,8 +39,9 @@ public class Mage extends Player {
 
         output.add(this.Name + " reached level " + this.Level + ": +" + (this.HealthPool - health) + " Health, +" + (this.AttackPoints - attack) +
                 " Attack, +" + (this.DefensePoints - defense) + " Defense, +" + (this.manaPool - maxMana) + " maximum mana, +" +
-                (this.spellPower - spellPwr) + " spell power.");
+                (this.spellPower - spellPwr) + " spell power."); //make sure it is printable in appropriate way in Console
     }
+
 
     @Override
     public int applySpecialAbility(List<Enemy> enemies, List<String> output) {
@@ -71,19 +73,23 @@ public class Mage extends Player {
 
         this.shuffleList(enemies);
 
+        output.add(this.Name + " cast Blizzard.");
         return this.spellPower;
     }
 
+    
     @Override
     public void updateGameTick() {
         this.currMana = Math.min(this.manaPool, this.currMana + Level);
     }
+
 
     @Override
     public String actualStats () {
         return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints +
                 "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + 50 + "  Mana: " + this.manaPool / 4 + "/" + this.manaPool;
     }
+
 
     private static void shuffleList(List<Enemy> list) { //shuffling the List using random indexes
         int n = list.size();
@@ -95,11 +101,13 @@ public class Mage extends Player {
         }
     }
 
+
     private static void swap(List<Enemy> a, int i, int change) { //help-method of shuffleList
         Enemy temp = a.get(i);
         a.set(i, a.get(change));
         a.set(change, temp);
     }
+
 
     private int randomize(int bound) { //randomize an number !not! including the bound
         int rand = (int) (Math.random() * bound); // maybe it is possible to avoid this casting
