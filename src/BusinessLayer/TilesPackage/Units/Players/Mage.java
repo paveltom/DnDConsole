@@ -3,6 +3,7 @@ package BusinessLayer.TilesPackage.Units.Players;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 
 import java.util.List;
+import java.util.Random;
 
 public class Mage extends Player {
     private int manaPool;
@@ -23,15 +24,26 @@ public class Mage extends Player {
     }
 
     public void LevelUP(List<String> output) {
+        int health = this.HealthPool;
+        int attack = this.AttackPoints;
+        int defense = this.DefensePoints;
+        int maxMana = this.manaPool;
+        int spellPwr = this.spellPower;
+
         super.LevelUP();
+
         this.manaPool = this.manaPool + (25 * Level);
         this.currMana = Math.min(this.currMana + this.manaPool / 4, this.manaPool);
         this.spellPower = this.spellPower + (10 * Level);
+
+        output.add(this.Name + " reached level " + this.Level + ": +" + (this.HealthPool - health) + " Health, +" + (this.AttackPoints - attack) +
+                " Attack, +" + (this.DefensePoints - defense) + " Defense, +" + (this.manaPool - maxMana) + " maximum mana, +" +
+                (this.spellPower - spellPwr) + " spell power.");
     }
 
     @Override
     public int applySpecialAbility(List<Enemy> enemies, List<String> output) {
-        if (this.currMana < this.manaCost) {
+        if (this.currMana < this.manaCost) { //in case there is no enough 'mana'
             enemies.clear();
             output.add(this.Name + " tried to cast Blizzard, but there was not enough mana: " + this.currMana + "/" + this.manaPool + ".");
             return 0;
@@ -39,48 +51,32 @@ public class Mage extends Player {
 
         this.currMana = this.currMana - this.manaCost;
 
-        int hits = 0;
         for (Enemy e : enemies){
             if (!(super.range(this.Position, e.Position) < this.abilityRange)) enemies.remove(e);
         }
 
-        //add same enemy to the list untill enemies.size<hits
+        //next algorithm adjusting 'enemies' list size to amount of 'hits' available to this Mage and
+        // then randomize the order the Enemies in 'enemies' list will be attacked.
+        int random;
+
+        while (this.hitCount > enemies.size()) {
+            random = this.randomize(enemies.size());
+            enemies.add(enemies.get(random));
+        }
+
+        while (this.hitCount < enemies.size()){
+            random = this.randomize(enemies.size());
+            enemies.remove(enemies.get(random));
+        }
+
+        this.shuffleList(enemies);
 
         return this.spellPower;
-
-
-        /*
-
-        for (Enemy e : enemies){
-            if (!(super.range(this.Position, e.Position) < 3)) enemies.remove(e);
-        }
-        int index = (int) (Math.random() * enemies.size());
-        Enemy chosen = enemies.get(index);
-        enemies.clear();
-        enemies.add(chosen);
-
-        output.add(this.Name + " used Avenger's Shield, healing for: " + (10 * this.DefensePoints) + ".");
-        return this.HealthPool / 10;
-
- */
-
-
     }
 
-
-    public void Ontickgame()
-    {
-        this.currMana=Math.min(this.manaPool,this.currMana+Level);
-    }
-    public void Onabilitycost() throws Exception {
-        if (this.currMana < this.manaCost) throw new Exception();
-        else {
-            this.currMana = this.currMana - this.manaCost;
-            int hit = 0;
-            while (hit < this.hitCount) {////////////////////
-
-            }
-        }
+    @Override
+    public void updateGameTick() {
+        this.currMana = Math.min(this.manaPool, this.currMana + Level);
     }
 
     @Override
@@ -89,8 +85,24 @@ public class Mage extends Player {
                 "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + 50 + "  Mana: " + this.manaPool / 4 + "/" + this.manaPool;
     }
 
-    @Override
-    public void updateGameTick() {
+    private static void shuffleList(List<Enemy> list) { //shuffling the List using random indexes
+        int n = list.size();
+        Random random = new Random();
+        random.nextInt();
+        for (int i = 0; i < n; i++) {
+            int change = i + random.nextInt(n - i);
+            swap(list, i, change);
+        }
+    }
 
+    private static void swap(List<Enemy> a, int i, int change) { //help-method of shuffleList
+        Enemy temp = a.get(i);
+        a.set(i, a.get(change));
+        a.set(change, temp);
+    }
+
+    private int randomize(int bound) { //randomize an number !not! including the bound
+        int rand = (int) (Math.random() * bound); // maybe it is possible to avoid this casting
+        return rand;
     }
 }

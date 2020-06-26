@@ -162,7 +162,7 @@ public class Board {
     }
 
 
-   private int randomize(int bound) {
+   private int randomize(int bound) { //randomize an number including the bound
        int rand = (int) (Math.random() * bound) + 1; // maybe it is possible to avoid this casting
        return rand;
    }
