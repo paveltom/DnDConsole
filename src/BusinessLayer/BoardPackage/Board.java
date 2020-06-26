@@ -140,7 +140,7 @@ public class Board {
         tile.getPosition().setPosition(columnToLeave, rowToLeave);
     }
 
-    private void attackDefend (Unit attacker, Unit defender){
+    private void attackDefend (Unit attacker, Unit defender){ //combat system help-method
         int attack = randomize(attacker.AttackPoints);
         int defend = randomize(defender.DefensePoints);
         int diff = attack - defend;

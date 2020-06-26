@@ -2,28 +2,24 @@ package BusinessLayer.TilesPackage.Units.Enemies;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Units.Unit;
 
-public class Enemy extends Unit {
-    protected int experience_value;
+public abstract class Enemy extends Unit {
 
     public Enemy(String[][] boardData, int x, int y,char c)
     {
         super(boardData, x, y,c);
+        //Experience is an Unit abstract class field!!!!!!!!!!!!!!!!!!!!!!!!!!
         //experience_value=Integer.parseInt(boardData[1][boardData[1].length]);
     }
 
     @Override
-    public String actualStats() {
-        return null;
-    }
+    public abstract String actualStats();
 
     @Override
-    public Coordinate actionPerTick(Coordinate currUserPosition) {
-        return null;
-    }
+    public abstract Coordinate actionPerTick(Coordinate currUserPosition);
+
+    public abstract void updateGameTick();
 
     @Override
-    public Coordinate actionPerTick(String s){
-        return new Coordinate(-1,-1);
-    }
+    public Coordinate actionPerTick(String s) { return new Coordinate(-1, -1); }
 
 }

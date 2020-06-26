@@ -77,7 +77,7 @@ public class Mage extends Player {
         return this.spellPower;
     }
 
-    
+
     @Override
     public void updateGameTick() {
         this.currMana = Math.min(this.manaPool, this.currMana + Level);

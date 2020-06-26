@@ -59,9 +59,7 @@ public abstract class Player extends Unit {
     }
 
     @Override
-    public String actualStats() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract String actualStats();
 
 
 }
