@@ -1,5 +1,6 @@
 package BusinessLayer.TilesPackage.Units.Enemies;
 import BusinessLayer.Coordinate;
+import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Unit;
 
 public abstract class Enemy extends Unit {
@@ -10,6 +11,13 @@ public abstract class Enemy extends Unit {
         //Experience is an Unit abstract class field!!!!!!!!!!!!!!!!!!!!!!!!!!
         //experience_value=Integer.parseInt(boardData[1][boardData[1].length]);
     }
+
+
+    @Override
+    public Enemy returnItself(){
+        return this;
+    }
+
 
     @Override
     public abstract String actualStats();

@@ -8,4 +8,9 @@ public class Empty extends Tile {
     public Empty(int x,int y) {
         super(new Coordinate(x, y), '.');
     }
+
+    @Override
+    public Empty returnItself(){
+        return this;
+    }
 }

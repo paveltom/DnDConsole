@@ -52,7 +52,7 @@ public class Board {
         if(!userInput.equals("q")) {
             Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
             Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
-            this.Action(this.CurrPlayer, userActionTile);
+            this.Action(this.CurrPlayer, userActionTile.returnItself(userActionTile));
         }
 
         for(Enemy e : this.EnemyList){
@@ -73,6 +73,7 @@ public class Board {
 
     private void Action(Tile t1, Tile t2) { // ==>  for overloading purposes
     }
+
 
     private void Action (Unit currCharacter, Wall tile){ // ==> doesn't move
 

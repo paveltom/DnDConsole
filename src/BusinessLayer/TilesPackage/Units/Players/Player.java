@@ -54,6 +54,11 @@ public abstract class Player extends Unit {
     }
 
     @Override
+    public Player returnItself(){
+        return this;
+    }
+
+    @Override
     public Coordinate actionPerTick(Coordinate c){
         return new Coordinate(-1,-1);
     }
