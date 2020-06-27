@@ -3,57 +3,57 @@ package BusinessLayer.TilesPackage.Units.Enemies;
 import BusinessLayer.Coordinate;
 
 public class Trap extends Enemy {
-    private int visibility_time;
-    private int invisibility_time;
-    private int tick_count;
+    private int visibilityTime;
+    private int invisibilityTime;
+    private int tickCount;
     private boolean visible;
 
     public Trap(String[][] boardData, int x, int y, String s) {
-        super(boardData, x, y,s.charAt(0));
-        Experience=Integer.parseInt(boardData[1][5]);
-        visibility_time=Integer.parseInt(boardData[1][6]);
-        invisibility_time=Integer.parseInt(boardData[1][7]);
-        tick_count=visibility_time;
-        visible=tick_count<visibility_time;
+        super(boardData, x, y, s.charAt(0));
+        this.Experience = Integer.parseInt(boardData[1][5]);
+        this.visibilityTime = Integer.parseInt(boardData[1][6]);
+        this.invisibilityTime = Integer.parseInt(boardData[1][7]);
+        this.tickCount = this.visibilityTime;
+        this.visible = this.tickCount < this.visibilityTime;
     }
 
 
-
-
     @Override
-    public Coordinate actionPerTick(Coordinate currUserPosition){ //not implemented!!!!!!!!!!!!!!!!!!!
+    public Coordinate actionPerTick(Coordinate currUserPosition) {
+        if (this.range(this.getPosition(), currUserPosition) < 2) return currUserPosition;
         return new Coordinate(0, 0);
     }
 
 
-    public void updateGameTick(){}
-
-
-    public String toString ()
-    {
-        visible=tick_count<visibility_time;
-        if(visible)
-            return Name.charAt(0)+"";
-        else return '.'+"";
-    }
-    //toString: if visible return 'B'\'Q'\'D', else return '.'
-
-//    @Override
-//    public Coordinate actionPerTick(Object currentUserPositionCoordinate) {
-//        if(tick_count==(visibility_time+invisibility_time))
-//            tick_count=0;
-//        else tick_count++;
-//        return null;
-//    }
-
-
     @Override
-    public String actualStats()
-    {
-        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+Experience;
+    public void updateGameTick() {
+        this.tickCount = this.tickCount + 1;
+        if (this.tickCount == this.visibilityTime && this.visible) {
+            this.visible = false;
+            this.tickCount = 0;
+        } else if (this.tickCount == this.invisibilityTime && !this.visible) {
+            this.visible = true;
+            this.tickCount = 0;
+        }
+    }
+
+
+    public String toString() {
+        visible = tickCount < visibilityTime;
+        if (visible)
+            return Name.charAt(0) + "";
+        else return '.' + "";
     }
 
 
     @Override
-    public Coordinate actionPerTick(String s) { return new Coordinate(-1, -1); }
+    public String actualStats() {
+        return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints + "  Experience Value: " + Experience;
+    }
+
+
+    @Override
+    public Coordinate actionPerTick(String s) {
+        return new Coordinate(-1, -1);
+    }
 }
