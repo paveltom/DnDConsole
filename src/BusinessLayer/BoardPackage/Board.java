@@ -62,9 +62,10 @@ public class Board {
             if (!this.PlayerAlive) break;
         }
 
+        this.updateGameTick(); //add to every Player's action method an boolean statement that validates player is alive + make sure this call does not adding any string to this.Output
         this.Output.add(this.toString());
         this.Output.add(this.CurrPlayer.actualStats());
-        this.updateGameTick(); //add to every Player's action method an boolean statement that validates player is alive + make sure this call does not adding any string to this.Output
+        if (!this.PlayerAlive) this.Output.add("GAME OVER...");
         return this.Output;
     }
 

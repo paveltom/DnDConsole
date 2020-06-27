@@ -100,8 +100,6 @@ public class Mage extends Player {
             swap(list, i, change);
         }
     }
-
-
     private static void swap(List<Enemy> a, int i, int change) { //help-method of shuffleList
         Enemy temp = a.get(i);
         a.set(i, a.get(change));
