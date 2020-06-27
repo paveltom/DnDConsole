@@ -10,12 +10,24 @@ public class Trap extends Enemy {
 
     public Trap(String[][] boardData, int x, int y, String s) {
         super(boardData, x, y,s.charAt(0));
-        experience_value=Integer.parseInt(boardData[1][5]);
+        Experience=Integer.parseInt(boardData[1][5]);
         visibility_time=Integer.parseInt(boardData[1][6]);
         invisibility_time=Integer.parseInt(boardData[1][7]);
         tick_count=visibility_time;
         visible=tick_count<visibility_time;
     }
+
+
+
+
+    @Override
+    public Coordinate actionPerTick(Coordinate currUserPosition){ //not implemented!!!!!!!!!!!!!!!!!!!
+        return new Coordinate(0, 0);
+    }
+
+
+    public void updateGameTick(){}
+
 
     public String toString ()
     {
@@ -26,16 +38,22 @@ public class Trap extends Enemy {
     }
     //toString: if visible return 'B'\'Q'\'D', else return '.'
 
-    @Override
-    public Coordinate actionPerTick(Object currentUserPositionCoordinate) {
-        if(tick_count==(visibility_time+invisibility_time))
-            tick_count=0;
-        else tick_count++;
-        return null;
-    }
+//    @Override
+//    public Coordinate actionPerTick(Object currentUserPositionCoordinate) {
+//        if(tick_count==(visibility_time+invisibility_time))
+//            tick_count=0;
+//        else tick_count++;
+//        return null;
+//    }
+
+
     @Override
     public String actualStats()
     {
-        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+experience_value;
+        return Name+"  Health: "+HealthAmount+"/"+HealthPool+"  Attack: "+AttackPoints+"  Defense: "+DefensePoints+"  Experience Value: "+Experience;
     }
+
+
+    @Override
+    public Coordinate actionPerTick(String s) { return new Coordinate(-1, -1); }
 }
