@@ -41,11 +41,11 @@ public abstract class Player extends Unit {
         int y = this.Position.getRowCoordinate();
         switch (userInput) {
             case "w":
-                return new Coordinate(x, y+1);
+                return new Coordinate(x, y-1);
             case "a":
                 return new Coordinate(x-1, y);
             case "s":
-                return new Coordinate(x, y-1);
+                return new Coordinate(x, y+1);
             case "d":
                 return new Coordinate(x+1, y);
             default:

@@ -3,6 +3,9 @@ package BusinessLayer.TilesPackage.Units.Enemies;
 import BusinessLayer.Coordinate;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Monster extends Enemy {
 
     private int visionRange;
@@ -37,44 +40,35 @@ public class Monster extends Enemy {
     }
 
     public Coordinate actionPerTick(Coordinate currUserPosition) {
-        if (range(this.getPosition(), currUserPosition) < this.visionRange){
+        int x = this.Position.getColumnCoordinate();
+        int y = this.Position.getRowCoordinate();
+
+        if (range(this.getPosition(), currUserPosition) < this.visionRange) {
             int dx = this.getPosition().getColumnCoordinate() - currUserPosition.getColumnCoordinate();
             int dy = this.getPosition().getRowCoordinate() - currUserPosition.getRowCoordinate();
             if (Math.abs(dx) > Math.abs(dy)) {
-                if (dx > 0) return null;//moveleft
-                else return null; //move right
+                if (dx > 0) return new Coordinate(x - 1, y); //moveleft
+                else return new Coordinate(x + 1, y); //move right
+            } else {
+                if (dy > 0) return new Coordinate(x, y - 1); //move up
+                else return new Coordinate(x, y + 1); // move down
             }
-            else {
-                if (dy > 0) return null; //move up
-                else return null; // move down
-            }
+        } else {
+            List<Coordinate> randomAction = new ArrayList<>();
+            randomAction.add(new Coordinate(x - 1, y));
+            randomAction.add(new Coordinate(x + 1, y));
+            randomAction.add(new Coordinate(x, y - 1));
+            randomAction.add(new Coordinate(x, y + 1));
+            randomAction.add(new Coordinate(x, y));
+            int rnd = (int) (Math.random() * 5); // maybe it is possible to avoid this casting
+            return randomAction.get(rnd); //perform random action
         }
-        else return null; //perform random action
-        
-        /*
-        if range(monster, player) < vision range then
-           dx ← enemyX − playerX
-           dy ← enemyY − playerY
-           if |dx| > |dy| then
-              if dx > 0 then
-                 Move left
-              else
-                 Move right
-           else
-              if dy > 0 then
-                 Move up
-              else
-                 Move down
-        else
-           Perform a random movement action: left, right, up, down or stay at the same place.
-         */
-
     }
 
     public void updateGameTick() {
     }
 
-    public int getvisionRange() {
+    public int getVisionRange() {
         return visionRange;
     }
 
