@@ -1,7 +1,9 @@
 package BusinessLayer.TilesPackage.Units.Enemies;
 import BusinessLayer.Coordinate;
+import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Unit;
+import BusinessLayer.Visitor;
 
 public abstract class Enemy extends Unit {
 
@@ -16,6 +18,11 @@ public abstract class Enemy extends Unit {
     @Override
     public Enemy returnItself(){
         return this;
+    }
+
+    @Override
+    public Enemy accept(Visitor v){
+        return v.visitEnemy(this);
     }
 
 

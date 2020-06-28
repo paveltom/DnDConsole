@@ -1,8 +1,11 @@
 package BusinessLayer.TilesPackage.Units.Players;
 import BusinessLayer.Coordinate;
+import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Unit;
+import BusinessLayer.Visitor;
+
 import java.util.List;
 
 public abstract class Player extends Unit {
@@ -65,6 +68,11 @@ public abstract class Player extends Unit {
 
     @Override
     public abstract String actualStats();
+
+    @Override
+    public Player accept(Visitor v){
+        return v.visitPlayer(this);
+    }
 
 
 }

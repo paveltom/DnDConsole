@@ -2,6 +2,7 @@ package BusinessLayer.TilesPackage.Environment;
 
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.Visitor;
 
 public class Empty extends Tile {
 
@@ -12,5 +13,10 @@ public class Empty extends Tile {
     @Override
     public Empty returnItself(){
         return this;
+    }
+
+    @Override
+    public Empty accept(Visitor v){
+        return v.visitEmpty(this);
     }
 }

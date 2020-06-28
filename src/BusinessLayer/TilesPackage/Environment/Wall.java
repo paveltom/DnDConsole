@@ -2,6 +2,7 @@ package BusinessLayer.TilesPackage.Environment;
 
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.Visitor;
 
 public class Wall extends Tile {
 
@@ -12,5 +13,10 @@ public class Wall extends Tile {
     @Override
     public Wall returnItself(){
         return this;
+    }
+
+    @Override
+    public Wall accept(Visitor v){
+        return v.visitWall(this);
     }
 }
