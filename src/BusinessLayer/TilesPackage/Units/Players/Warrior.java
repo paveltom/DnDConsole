@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Warrior extends Player {
 
-    private int coolDown;
+    private final int coolDown;
     private int coolDownCounter; //changes on game tick
 
     public Warrior(String[][] p, int x, int y, String s) {
@@ -75,7 +75,7 @@ public class Warrior extends Player {
 
     @Override
     public void updateGameTick() {
-        if (coolDownCounter > 0) coolDownCounter = coolDownCounter - 1;
+        if (coolDownCounter > 0) coolDownCounter = coolDownCounter - 1; // there is a mistake - double subtraction!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
 
