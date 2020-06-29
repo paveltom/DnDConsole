@@ -1,5 +1,6 @@
 package BusinessLayer.TilesPackage.Units;
 
+import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.Subscriber;
 import BusinessLayer.TilesPackage.Environment.Empty;
@@ -27,6 +28,7 @@ public abstract class Unit extends Tile implements Subscriber {
         this.HealthPool = this.HealthAmount;
         this.AttackPoints = Integer.parseInt(p[1][3]);
         this.DefensePoints = Integer.parseInt(p[1][4]);
+        this.ActualStatus = true;
     }
 
 

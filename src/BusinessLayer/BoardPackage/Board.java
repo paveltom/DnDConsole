@@ -31,7 +31,7 @@ public class Board {
         this.EnemyList = new ArrayList<Enemy>();
         this.PlayerSelection = BoardCreator.PlayerSelection();
         this.Listeners = new ArrayList<Unit>();
-        this.SubscribeListener(this.CurrPlayer); //subscribing current player to Listener pattern logic
+        this.PlayerAlive = true;
     }
     
     public String getPlayerSelection(){ return PlayerSelection;}
@@ -40,6 +40,7 @@ public class Board {
         CurrBoard = BoardCreator.createBoard(level, playerChoice);
         EnemyList = BoardCreator.getEnemyList();
         CurrPlayer = BoardCreator.getCurrPlayer();
+        this.SubscribeListener(this.CurrPlayer); //subscribing current player to Listener pattern logic
         for(Enemy e : this.EnemyList) this.SubscribeListener(e); //subscribing the enemies to Listener pattern logic
     }
     
@@ -54,13 +55,14 @@ public class Board {
         if(!userInput.equals("q")) {
             Coordinate userActionCoordinate = this.CurrPlayer.actionPerTick(userInput);
             Tile userActionTile = this.CurrBoard[userActionCoordinate.getRowCoordinate()][userActionCoordinate.getColumnCoordinate()];
-            this.Action(this.CurrPlayer, userActionTile); //?????????????????????????????????????????????????
+            userActionTile.act(this.CurrPlayer, this);
         }
 
         for(Enemy e : this.EnemyList){
             Coordinate enemyActionCoordinate = e.actionPerTick(this.CurrPlayer.getPosition());
             Tile enemyActionTile = this.CurrBoard[enemyActionCoordinate.getRowCoordinate()][enemyActionCoordinate.getColumnCoordinate()];
-            this.Action(e, enemyActionTile);
+//            this.Action(e, enemyActionTile);
+            enemyActionTile.act(e, this);
             if (!this.PlayerAlive) break;
         }
 
@@ -73,35 +75,34 @@ public class Board {
 
 
 
-    private void Action(Player player, Tile tile) { // ==>  for overloading purposes
-        String temp = tile.toString();
-        switch (temp) {
-            case ".":
-                this.moveAction(player, tile);
-            case "#":
-                this.doNotMoveAction(player, tile);
-            case "@":
-                this.specialAction(player, player);
-            default:
-                this.attackAction(player, tile);
-        }
+//    public void Action(Player player, Tile tile) { // ==>  for overloading purposes
+//        String temp = tile.toString();
+//        switch (temp) {
+//            case ".":
+//                this.moveAction(player, tile);
+//            case "#":
+//                this.doNotMoveAction(player, tile);
+//            case "@":
+//                this.specialAction(player, player);
+//            default:
+//                this.attackAction(player, (Unit)tile);
+//        }
+//    }
+//
+//    public void Action(Enemy enemy, Tile t2) { // ==>  for overloading purposes
+//
+//    }
+
+
+    public void doNotMoveAction (Unit currCharacter, Tile tile){ // ==> doesn't move
     }
 
-    private void Action(Enemy enemy, Tile t2) { // ==>  for overloading purposes
 
+    public void doNotAttackAction (Enemy e1, Enemy e2) { // => in case enemy meets enemy
     }
 
 
-    private void doNotMoveAction (Unit currCharacter, Tile tile){ // ==> doesn't move
-
-    }
-
-
-    private void doNotAttackAction (Enemy e1, Enemy e2) { // => in case enemy meets enemy
-
-    }
-
-    private void attackAction (Unit attacker, Unit defender) {
+    public void attackAction (Unit attacker, Unit defender) {
         this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
         this.Output.add(attacker.actualStats());
         this.Output.add(defender.actualStats());
@@ -129,7 +130,7 @@ public class Board {
     }
 
 
-    private void specialAction (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
+    public void specialAction (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
         List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
         int attack = currPlayer.applySpecialAbility(enemiesToAttack, this.Output); //both lists are updated in player class itself
         for(Enemy e : enemiesToAttack) {
@@ -149,7 +150,7 @@ public class Board {
     }
 
 
-    private void moveAction (Unit currCharacter, Tile tile) { //  ==>  in case of movement
+    public void moveAction (Unit currCharacter, Tile tile) { //  ==>  in case of movement
         int columnToGo = tile.getPosition().getColumnCoordinate();
         int rowToGo = tile.getPosition().getRowCoordinate();
         int columnToLeave = currCharacter.getPosition().getColumnCoordinate();

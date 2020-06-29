@@ -1,6 +1,8 @@
 package BusinessLayer.TilesPackage.Units.Players;
+import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
+import BusinessLayer.TilesPackage.Environment.Wall;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Unit;
@@ -56,10 +58,6 @@ public abstract class Player extends Unit {
         }
     }
 
-    @Override
-    public Player returnItself(){
-        return this;
-    }
 
     @Override
     public Coordinate actionPerTick(Coordinate c){
@@ -70,9 +68,23 @@ public abstract class Player extends Unit {
     public abstract String actualStats();
 
     @Override
-    public Player accept(Visitor v){
-        return v.visitPlayer(this);
+    public void act(Enemy enemy, Board board){
+        board.attackAction(enemy, this);
     }
 
+    @Override
+    public void act(Player player, Board board){
+        board.specialAction(this, this); //we can erase the second parameter from the signature in Board
+    }
+
+    @Override
+    public void act(Empty empty, Board board){
+        board.moveAction(this, empty);
+    }
+
+    @Override
+    public void act(Wall wall, Board board){
+        board.doNotMoveAction(this, wall); //we can delete all the parameters from this signature in Board
+    }
 
 }

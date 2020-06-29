@@ -1,6 +1,8 @@
 package BusinessLayer.TilesPackage.Units.Players;
 
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Warrior extends Player {
@@ -27,13 +29,20 @@ public class Warrior extends Player {
         this.coolDownCounter = this.coolDown;
         this.HealthAmount = Math.min(this.HealthAmount + (this.DefensePoints * 10), this.HealthPool);
 
+        List<Enemy> wantedEnemies = new ArrayList<>(enemies);
         for (Enemy e : enemies){ //sorting the 'enemies' so only the Enemies in the range of 3 will not be removed
-            if (!(super.range(this.Position, e.Position) < 3)) enemies.remove(e);
+            if (!(super.range(this.Position, e.Position) < 3)) wantedEnemies.remove(e);
         }
-        int index = (int) (Math.random() * enemies.size());
-        Enemy chosen = enemies.get(index);
         enemies.clear();
-        enemies.add(chosen);
+        for (Enemy e : wantedEnemies) enemies.add(e);
+
+        int index = (int) (Math.random() * enemies.size());
+        Enemy chosen;
+        if (enemies.size()>0) {
+            chosen = enemies.get(index);
+            enemies.clear();
+            enemies.add(chosen);
+        }
 
         output.add(this.Name + " used Avenger's Shield, healing for: " + (10 * this.DefensePoints) + ".");
         return this.HealthPool / 10;

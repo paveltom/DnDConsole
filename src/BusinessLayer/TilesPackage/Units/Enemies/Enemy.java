@@ -1,7 +1,10 @@
 package BusinessLayer.TilesPackage.Units.Enemies;
+import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
+import BusinessLayer.TilesPackage.Environment.Wall;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.TilesPackage.Units.Players.Player;
 import BusinessLayer.TilesPackage.Units.Unit;
 import BusinessLayer.Visitor;
 
@@ -15,16 +18,6 @@ public abstract class Enemy extends Unit {
     }
 
 
-    @Override
-    public Enemy returnItself(){
-        return this;
-    }
-
-    @Override
-    public Enemy accept(Visitor v){
-        return v.visitEnemy(this);
-    }
-
 
     @Override
     public abstract String actualStats();
@@ -37,4 +30,24 @@ public abstract class Enemy extends Unit {
     @Override
     public Coordinate actionPerTick(String s) { return new Coordinate(-1, -1); }
 
+
+    @Override
+    public void act(Enemy enemy, Board board){
+        board.doNotAttackAction(this, enemy); // we dont really need this method in Board - just dont do anything in this case
+    }
+
+    @Override
+    public void act(Player player, Board board){
+        board.attackAction(player, this);
+    }
+
+    @Override
+    public void act(Empty empty, Board board){
+        board.moveAction(this, empty);
+    }
+
+    @Override
+    public void act(Wall wall, Board board){
+        board.doNotMoveAction(this, wall);
+    }
 }

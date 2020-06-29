@@ -58,7 +58,7 @@ public class service {
             System.out.println(run);
         }
         if(b.PlayerAlive()){////////////////////// necessary???
-            System.out.println(b.toString());
+//            System.out.println(b.toString());
             if(b.getEnemySize()==0)
                 nextLevel(args);
             gameTick();

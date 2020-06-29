@@ -1,7 +1,11 @@
 package BusinessLayer.TilesPackage.Environment;
 
+import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Tile;
+import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
+import BusinessLayer.TilesPackage.Units.Players.Player;
+import BusinessLayer.TilesPackage.Units.Unit;
 import BusinessLayer.Visitor;
 
 public class Wall extends Tile {
@@ -11,12 +15,9 @@ public class Wall extends Tile {
     }
 
     @Override
-    public Wall returnItself(){
-        return this;
-    }
+    public void act(Player unit, Board board) {board.doNotMoveAction(unit, this);}
 
     @Override
-    public Wall accept(Visitor v){
-        return v.visitWall(this);
-    }
+    public void act(Enemy unit, Board board) {board.doNotMoveAction(unit, this);}
+
 }
