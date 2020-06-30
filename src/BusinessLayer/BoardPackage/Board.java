@@ -80,7 +80,7 @@ public class Board {
 
 
     public void attackAction (Unit attacker, Unit defender) {
-        this.Output.add(attacker.Name + " engaged in combat with " + defender.Name + ".");
+        this.Output.add(attacker.Name + " attacked " + defender.Name + ".");
         this.Output.add(attacker.actualStats());
         this.Output.add(defender.actualStats());
         this.attackDefend(attacker, defender); // attack\defend string are added in this.attackDefend method
@@ -109,20 +109,34 @@ public class Board {
 
     public void specialAction (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
         List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
+        List<Enemy> tempEnemies = new ArrayList<>(enemiesToAttack);
         int attack = currPlayer.applySpecialAbility(enemiesToAttack, this.Output); //both lists are updated in player class itself
-        for(Enemy e : enemiesToAttack) {
-            int defend = randomize(e.DefensePoints);
-            int diff = attack - defend;
-            if (diff < 0) diff = 0;
-            e.HealthAmount = e.HealthAmount - diff;
-            this.Output.add(e.Name + " rolled " + defend + " defense points.");
-            this.Output.add(currPlayer.Name + " dealt " + diff + " damage to "+e.Name+"."); //maybe change the message to 'hit' so it'll be different from combat message
-            this.updateActualStatus(); //observer pattern update method
-            if (!e.ActualStatus) {
-                this.Output.add(e.Name + " died. " + currPlayer.Name + " gained " + e.Experience + " experience.");
-                currPlayer.updateExperience(e.Experience, this.Output);// => updateExperience returns List<String>
-                this.UnsubscribeListener(e);
+        int numOfEnemies = enemiesToAttack.size();
+        while (numOfEnemies > 0) {
+            for (Enemy e : enemiesToAttack) {
+                if (e.ActualStatus) {
+                    int defend = randomize(e.DefensePoints);
+                    int diff = attack - defend;
+                    if (diff < 0) diff = 0;
+                    e.HealthAmount = e.HealthAmount - diff;
+                    this.Output.add(e.Name + " rolled " + defend + " defense points.");
+                    this.Output.add(currPlayer.Name + " dealt " + diff + " damage to " + e.Name + "."); //maybe change the message to 'hit' so it'll be different from combat message
+                    this.updateActualStatus(); //observer pattern update method
+                    if (!e.ActualStatus) {
+                        this.Output.add(e.Name + " died. " + currPlayer.Name + " gained " + e.Experience + " experience.");
+                        currPlayer.updateExperience(e.Experience, this.Output);// => updateExperience returns List<String>
+                        this.EnemyList.remove(e);
+                        this.UnsubscribeListener(e);
+                        int x = e.getPosition().getColumnCoordinate();
+                        int y = e.getPosition().getRowCoordinate();
+                        Empty deadEnemy = new Empty(x, y);//defender changes to empty and sended to action of movement
+                        this.CurrBoard[y][x] = deadEnemy;
+                        while (tempEnemies.contains(e)) tempEnemies.remove(e);
+                    }
+                    numOfEnemies--;
+                }
             }
+            if (tempEnemies.size() == 0) numOfEnemies = 0;
         }
     }
 

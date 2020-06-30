@@ -2,6 +2,7 @@ package BusinessLayer.TilesPackage.Units.Players;
 
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rogue extends Player {
@@ -38,9 +39,13 @@ public class Rogue extends Player {
         }
 
         energy = energy - cost;
+
+        List<Enemy> wantedEnemies = new ArrayList<>(enemies);
         for (Enemy e : enemies){ //sorting the 'enemies' so only the Enemies in the range of 2 will not be removed
-            if (!(super.range(this.Position, e.Position) < 2)) enemies.remove(e);
+            if (!(super.range(this.Position, e.Position) < 2)) wantedEnemies.remove(e);
         }
+        enemies.clear();
+        for (Enemy e : wantedEnemies) enemies.add(e);
 
         output.add(this.Name + " cast Fan of Knives.");
         return this.AttackPoints;
@@ -51,6 +56,7 @@ public class Rogue extends Player {
     public void updateGameTick() {
         energy = Math.min(energy + 10, 100);
     }
+
 
 
     @Override

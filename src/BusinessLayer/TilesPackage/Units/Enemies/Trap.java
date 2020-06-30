@@ -14,7 +14,7 @@ public class Trap extends Enemy {
         this.visibilityTime = Integer.parseInt(boardData[1][6]);
         this.invisibilityTime = Integer.parseInt(boardData[1][7]);
         this.tickCount = this.visibilityTime;
-        this.visible = this.tickCount < this.visibilityTime;
+        this.visible = true;
     }
 
 
@@ -27,20 +27,23 @@ public class Trap extends Enemy {
 
     @Override
     public void updateGameTick() {
-        this.tickCount = this.tickCount + 1;
-        if (this.tickCount == this.visibilityTime && this.visible) {
-            this.visible = false;
-            this.tickCount = 0;
-        } else if (this.tickCount == this.invisibilityTime && !this.visible) {
-            this.visible = true;
-            this.tickCount = 0;
+        this.tickCount = this.tickCount - 1;
+
+        if (this.tickCount <= 0){
+            if (this.visible){
+                this.visible = false;
+                this.tickCount = this.invisibilityTime;
+            }
+            else {
+                this.visible = true;
+                this.tickCount = this.visibilityTime;
+            }
         }
     }
 
 
     @Override
     public String toString() {
-        visible = tickCount < visibilityTime;
         if (visible)
             return Name.charAt(0) + "";
         else return '.' + "";

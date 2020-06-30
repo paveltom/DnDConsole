@@ -36,10 +36,9 @@ public class Warrior extends Player {
         enemies.clear();
         for (Enemy e : wantedEnemies) enemies.add(e);
 
-        int index = (int) (Math.random() * enemies.size());
-        Enemy chosen;
         if (enemies.size() > 0) {
-            chosen = enemies.get(index);
+            int index = (int) (Math.random() * enemies.size());
+            Enemy chosen = enemies.get(index);
             enemies.clear();
             enemies.add(chosen);
         }

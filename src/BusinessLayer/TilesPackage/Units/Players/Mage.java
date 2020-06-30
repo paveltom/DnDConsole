@@ -2,6 +2,7 @@ package BusinessLayer.TilesPackage.Units.Players;
 
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,11 +17,11 @@ public class Mage extends Player {
     public Mage(String[][] boardData, int x, int y, String s) {
         super(boardData, x, y, s.charAt(0));
         this.manaPool = Integer.parseInt(boardData[1][5]);
-        this.currMana = this.manaCost / 4;
         this.manaCost = Integer.parseInt(boardData[1][6]);
+        this.currMana = this.manaPool / 4;
         this.spellPower = Integer.parseInt(boardData[1][7]);
         this.hitCount = Integer.parseInt(boardData[1][8]);
-        abilityRange = Integer.parseInt(boardData[1][9]);
+        this.abilityRange = Integer.parseInt(boardData[1][9]);
     }
 
 
@@ -53,9 +54,12 @@ public class Mage extends Player {
 
         this.currMana = this.currMana - this.manaCost;
 
+        List<Enemy> wantedEnemies = new ArrayList<>(enemies);
         for (Enemy e : enemies){
-            if (!(super.range(this.Position, e.Position) < this.abilityRange)) enemies.remove(e);
+            if (!(super.range(this.Position, e.Position) < this.abilityRange)) wantedEnemies.remove(e);
         }
+        enemies.clear();
+        for (Enemy e : wantedEnemies) enemies.add(e);
 
         //next algorithm adjusting 'enemies' list size to amount of 'hits' available to this Mage and
         // then randomize the order the Enemies in 'enemies' list will be attacked.
@@ -91,8 +95,8 @@ public class Mage extends Player {
 
     @Override
     public String actualStats () {
-        return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints +
-                "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + (50*this.Level) + "  Mana: " + this.currMana + "/" + this.manaPool;
+        return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints + "  Level: " + Level +
+                '\n' + "Experience: " + Experience + "/" + (50*this.Level) + "  Mana: " + this.currMana + "/" + this.manaPool + "  Spell Power: "+this.spellPower;
     }
 
 
