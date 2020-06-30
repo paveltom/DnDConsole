@@ -12,7 +12,7 @@ public class Rogue extends Player {
 
     public Rogue(String[][] p, int x, int y, String s) {
         super(p, x, y, s.charAt(0));
-        cost = Integer.parseInt(p[1][5]);
+        cost = Integer.parseInt(p[1][6]);
     }
 
 

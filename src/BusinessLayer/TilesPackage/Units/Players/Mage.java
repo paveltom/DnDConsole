@@ -16,12 +16,12 @@ public class Mage extends Player {
 
     public Mage(String[][] boardData, int x, int y, String s) {
         super(boardData, x, y, s.charAt(0));
-        this.manaPool = Integer.parseInt(boardData[1][5]);
-        this.manaCost = Integer.parseInt(boardData[1][6]);
+        this.manaPool = Integer.parseInt(boardData[1][7]);
+        this.manaCost = Integer.parseInt(boardData[1][8]);
         this.currMana = this.manaPool / 4;
-        this.spellPower = Integer.parseInt(boardData[1][7]);
-        this.hitCount = Integer.parseInt(boardData[1][8]);
-        this.abilityRange = Integer.parseInt(boardData[1][9]);
+        this.spellPower = Integer.parseInt(boardData[1][9]);
+        this.hitCount = Integer.parseInt(boardData[1][10]);
+        this.abilityRange = Integer.parseInt(boardData[1][11]);
     }
 
 

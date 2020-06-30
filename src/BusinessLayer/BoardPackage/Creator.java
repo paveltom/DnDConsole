@@ -27,8 +27,8 @@ public class Creator {
     private final String[] td = {"Type:","Name:","Health:","Attack:","Defense:","Experience Value:","Visibility Time:","Invisibility Time:"};
     private final String[] jon_snow ={w,"Jon Snow","300","30","4","1","50","3"};
     private final String[] the_hound ={w,"The Hound","400","20","6","1","50","5"};
-    private final String[] melisandre ={ma,"Melisandre","100","5","1","300","30","15","5","6"};
-    private final String[] thoros_of_myr ={ma,"Thoros of Myr","250","25","4","150","20","20","3","4"};
+    private final String[] melisandre ={ma,"Melisandre","100","5","1","1","50","300","30","15","5","6"};
+    private final String[] thoros_of_myr ={ma,"Thoros of Myr","250","25","4","1","50","150","20","20","3","4"};
     private final String[] arya_stark ={r,"Arya Stark","150","40","2","1","50","100"};
     private final String[] bronn ={r,"Bronn","250","35","3","1","50","100"};
     private final String[] lannister_solider ={m,"Lannister Solider","80","8","3","3","25"};
