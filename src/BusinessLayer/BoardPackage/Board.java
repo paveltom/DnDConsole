@@ -109,10 +109,9 @@ public class Board {
 
     public void specialAction (Player currPlayer, Player currPlayerClone){  // ==>  in case of special ability
         List<Enemy> enemiesToAttack = new ArrayList<Enemy>(this.EnemyList);
-        List<Enemy> tempEnemies = new ArrayList<>(enemiesToAttack);
         int attack = currPlayer.applySpecialAbility(enemiesToAttack, this.Output); //both lists are updated in player class itself
         int numOfEnemies = enemiesToAttack.size();
-        while (numOfEnemies > 0) {
+        for (int i = numOfEnemies; i > 0; i--) {
             for (Enemy e : enemiesToAttack) {
                 if (e.ActualStatus) {
                     int defend = randomize(e.DefensePoints);
@@ -131,12 +130,11 @@ public class Board {
                         int y = e.getPosition().getRowCoordinate();
                         Empty deadEnemy = new Empty(x, y);//defender changes to empty and sended to action of movement
                         this.CurrBoard[y][x] = deadEnemy;
-                        while (tempEnemies.contains(e)) tempEnemies.remove(e);
                     }
                     numOfEnemies--;
                 }
             }
-            if (tempEnemies.size() == 0) numOfEnemies = 0;
+            if (i > numOfEnemies) i = numOfEnemies;
         }
     }
 
