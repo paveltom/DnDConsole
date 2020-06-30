@@ -38,6 +38,7 @@ public class Trap extends Enemy {
     }
 
 
+    @Override
     public String toString() {
         visible = tickCount < visibilityTime;
         if (visible)

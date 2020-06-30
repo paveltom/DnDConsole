@@ -1,12 +1,10 @@
 package BusinessLayer.BoardPackage;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
-import BusinessLayer.TilesPackage.Environment.Wall;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Unit;
 import BusinessLayer.TilesPackage.Units.Players.Player;
-import BusinessLayer.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,27 +70,6 @@ public class Board {
         if (!this.PlayerAlive) this.Output.add("GAME OVER...");
         return this.Output;
     }
-
-
-
-//    public void Action(Player player, Tile tile) { // ==>  for overloading purposes
-//        String temp = tile.toString();
-//        switch (temp) {
-//            case ".":
-//                this.moveAction(player, tile);
-//            case "#":
-//                this.doNotMoveAction(player, tile);
-//            case "@":
-//                this.specialAction(player, player);
-//            default:
-//                this.attackAction(player, (Unit)tile);
-//        }
-//    }
-//
-//    public void Action(Enemy enemy, Tile t2) { // ==>  for overloading purposes
-//
-//    }
-
 
     public void doNotMoveAction (Unit currCharacter, Tile tile){ // ==> doesn't move
     }
@@ -206,96 +183,5 @@ public class Board {
     public void UnsubscribeListener(Unit toUnsubscribe){
         this.Listeners.add(toUnsubscribe);
     }
-
-    //combatResultMethod that adds strings to output in the end of an combat action (specialAbility or combat)
-
-
-
-
-
-
-
-
-//    public void PlayerTick(String s) throws Exception {
-//        if(s!="e") {
-//            if (s == "d")
-//                checkRightTile();
-//            else if (s == "a")
-//                checkLeftTile();
-//            else if (s == "s")
-//                checkDownTile();
-//            else if (s == "w")
-//                checkUPTile();
-//            if(!tickcheck)
-//                throw new Exception();
-//            tickcheck=false;
-//        }
-//        /////// special ability!!!!!!
-//    }
-//
-//
-//    public void checkRightTile()
-//    {
-//        Coordinate temp = CurrPlayer.getPosition();
-//        int y=temp.getRowCoordinate();
-//        int x=temp.getolumnCoordinate();
-//        if(!(CurrBoard[x][y+1].ToString().equals("#"))) {
-//            if (CurrBoard[x][y + 1].ToString().equals("."))///////////////////////////////////
-//            {
-//                Tile change = CurrBoard[x][y + 1];
-//                CurrBoard[x][y + 1] = CurrBoard[x][y];
-//                CurrBoard[x][y] = change;
-//            } else Combat(CurrPlayer,"R");
-//        }
-//        tickcheck=true;
-//    }
-//    public void checkLeftTile()
-//    {
-//        Coordinate temp = CurrPlayer.getPosition();
-//        int y=temp.getRowCoordinate();
-//        int x=temp.getolumnCoordinate();
-//        if(!(CurrBoard[x][y-1].ToString().equals("#"))) {
-//            if (CurrBoard[x][y - 1].ToString().equals("."))/////////////////////////////////////
-//            {
-//                Tile change = CurrBoard[x][y - 1];
-//                CurrBoard[x][y - 1] = CurrBoard[x][y];
-//                CurrBoard[x][y] = change;
-//            } else Combat(CurrPlayer,"L");
-//        }
-//        tickcheck=true;
-//    }
-//    public void checkDownTile()
-//    {
-//        Coordinate temp = CurrPlayer.getPosition();
-//        int y=temp.getRowCoordinate();
-//        int x=temp.getolumnCoordinate();
-//        if(!(CurrBoard[x-1][y].ToString().equals("#"))) {
-//            if (CurrBoard[x-1][y].ToString().equals("."))/////////////////////////////////////
-//            {
-//                Tile change = CurrBoard[x][y - 1];
-//                CurrBoard[x-1][y] = CurrBoard[x][y];
-//                CurrBoard[x][y] = change;
-//            }else Combat(CurrPlayer,"D");
-//        }
-//        tickcheck=true;
-//    }
-//    public void checkUPTile()
-//    {
-//        Coordinate temp = CurrPlayer.getPosition();
-//        int y=temp.getRowCoordinate();
-//        int x=temp.getolumnCoordinate();
-//        if(!(CurrBoard[x+1][y].ToString().equals("#"))) {
-//            if (CurrBoard[x+1][y].ToString().equals("."))/////////////////////////////////////
-//            {
-//                Tile change = CurrBoard[x+1][y];
-//                CurrBoard[x+1][y] = CurrBoard[x][y];
-//                CurrBoard[x][y] = change;
-//            }
-//            else Combat(CurrPlayer,"U");
-//        }
-//        tickcheck=true;
-//    }
-//    private void Combat(Tile A,String derc){}
-
 
 }

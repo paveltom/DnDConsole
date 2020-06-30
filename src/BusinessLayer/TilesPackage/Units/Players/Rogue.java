@@ -63,6 +63,6 @@ public class Rogue extends Player {
     @Override
     public String actualStats() {
         return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints + "  Level: " +
-                Level + '\n' + "Experience: " + Experience + "/" + 50 + "  Energy:" + energy;
+                Level + '\n' + "Experience: " + Experience + "/" + (50*this.Level) + "  Energy:" + energy;
     }
 }

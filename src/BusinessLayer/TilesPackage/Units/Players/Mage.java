@@ -77,6 +77,11 @@ public class Mage extends Player {
         return this.spellPower;
     }
 
+    @Override
+    public void updateExperience(int experience, List<String> output) {
+        super.updateExperience(experience, output);
+        if (this.Experience >= 50 * this.Level) this.LevelUP(output);
+    }
 
     @Override
     public void updateGameTick() {
@@ -87,7 +92,7 @@ public class Mage extends Player {
     @Override
     public String actualStats () {
         return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints +
-                "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + 50 + "  Mana: " + this.manaPool / 4 + "/" + this.manaPool;
+                "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + (50*this.Level) + "  Mana: " + this.currMana + "/" + this.manaPool;
     }
 
 

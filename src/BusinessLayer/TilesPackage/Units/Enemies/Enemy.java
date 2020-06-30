@@ -3,10 +3,8 @@ import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Environment.Wall;
-import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Players.Player;
 import BusinessLayer.TilesPackage.Units.Unit;
-import BusinessLayer.Visitor;
 
 public abstract class Enemy extends Unit {
 

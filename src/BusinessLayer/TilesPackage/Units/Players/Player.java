@@ -3,10 +3,8 @@ import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Environment.Wall;
-import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Unit;
-import BusinessLayer.Visitor;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public abstract class Player extends Unit {
 
 
     public void updateExperience(int experience, List<String> output){
-        this.Experience = this.Experience+experience; //override with LevelUp statement in each player.Class
+        this.Experience = this.Experience+experience; //overridden with LevelUp statement in each player.Class
     }
 
 
@@ -69,6 +67,7 @@ public abstract class Player extends Unit {
 
     @Override
     public void act(Enemy enemy, Board board){
+
         board.attackAction(enemy, this);
     }
 

@@ -5,8 +5,6 @@ import BusinessLayer.Coordinate;
 import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Players.Player;
-import BusinessLayer.TilesPackage.Units.Unit;
-import BusinessLayer.Visitor;
 
 public class Empty extends Tile {
 

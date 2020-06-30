@@ -26,11 +26,11 @@ public class Warrior extends Player {
             return 0;
         }
 
-        this.coolDownCounter = this.coolDown;
+        this.coolDownCounter = this.coolDown + 1; //updateTick will remove '+1'
         this.HealthAmount = Math.min(this.HealthAmount + (this.DefensePoints * 10), this.HealthPool);
 
         List<Enemy> wantedEnemies = new ArrayList<>(enemies);
-        for (Enemy e : enemies){ //sorting the 'enemies' so only the Enemies in the range of 3 will not be removed
+        for (Enemy e : enemies) { //sorting the 'enemies' so only the Enemies in the range of 3 will not be removed
             if (!(super.range(this.Position, e.Position) < 3)) wantedEnemies.remove(e);
         }
         enemies.clear();
@@ -38,7 +38,7 @@ public class Warrior extends Player {
 
         int index = (int) (Math.random() * enemies.size());
         Enemy chosen;
-        if (enemies.size()>0) {
+        if (enemies.size() > 0) {
             chosen = enemies.get(index);
             enemies.clear();
             enemies.add(chosen);
@@ -75,13 +75,14 @@ public class Warrior extends Player {
 
     @Override
     public void updateGameTick() {
-        if (coolDownCounter > 0) coolDownCounter = coolDownCounter - 1; // there is a mistake - double subtraction!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (coolDownCounter > 0) coolDownCounter = coolDownCounter - 1;
     }
 
 
     @Override
     public String actualStats() {
-        return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints + "  Level: " + Level + '\n' + "Experience: " + Experience + "/" + 50 + "  Cooldown: " + coolDownCounter + "/" + coolDown;
+        return Name + "  Health: " + HealthAmount + "/" + HealthPool + "  Attack: " + AttackPoints + "  Defense: " + DefensePoints + "  Level: " + Level +
+                '\n' + "Experience: " + Experience + "/" + (50 * this.Level) + "  Cooldown: " + coolDownCounter + "/" + coolDown;
     }
 
 
