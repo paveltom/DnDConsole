@@ -60,23 +60,25 @@ public class Mage extends Player {
             if (!(super.range(this.Position, e.Position) < this.abilityRange)) wantedEnemies.remove(e);
         }
         enemies.clear();
-        for (Enemy e : wantedEnemies) enemies.add(e);
+        if (!(wantedEnemies.size() == 0)) {
+            for (Enemy e : wantedEnemies) enemies.add(e);
 
-        //next algorithm adjusting 'enemies' list size to amount of 'hits' available to this Mage and
-        // then randomize the order the Enemies in 'enemies' list will be attacked.
-        int random;
+            //next algorithm adjusting 'enemies' list size to amount of 'hits' available to this Mage and
+            // then randomize the order the Enemies in 'enemies' list will be attacked.
+            int random;
 
-        while (this.hitCount > enemies.size()) {
-            random = this.randomize(enemies.size());
-            enemies.add(enemies.get(random));
+            while (this.hitCount > enemies.size()) {
+                random = this.randomize(enemies.size());
+                enemies.add(enemies.get(random));
+            }
+
+            while (this.hitCount < enemies.size()) {
+                random = this.randomize(enemies.size());
+                enemies.remove(enemies.get(random));
+            }
+
+            this.shuffleList(enemies);
         }
-
-        while (this.hitCount < enemies.size()){
-            random = this.randomize(enemies.size());
-            enemies.remove(enemies.get(random));
-        }
-
-        this.shuffleList(enemies);
 
         output.add(this.Name + " cast Blizzard.");
         return this.spellPower;

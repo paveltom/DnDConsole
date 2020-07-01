@@ -70,6 +70,7 @@ public class service {
             Player CurrPlayer = b.getCurrPlayer();
             level = readfile(args);
             b.crateBoard(level, 1);
+            CurrPlayer.getPosition().setPosition(b.getCurrPlayer().getPosition().getColumnCoordinate(), b.getCurrPlayer().getPosition().getRowCoordinate());
             b.setCurrPlayer(CurrPlayer);
             for (int a = 0; a < level.length; a++) {
                 for (int j = 0; j < level[a].length; j++)
@@ -108,6 +109,7 @@ public class service {
             return level;
         }
         System.out.println("YOU WON, Congratulations!");
+        System.exit(0);
         return null;
     }
     private String [] Translate (String Currline)

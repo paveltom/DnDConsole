@@ -123,7 +123,7 @@ public class Creator {
     }
     public Tile [][] createBoard(String[][] level,int p)
     {
-        board =new Tile[level.length][];
+        board = new Tile[level.length][];
         Tile[] Currline;
         for(int i=0;i<level.length;i++)
         {
