@@ -57,7 +57,7 @@ public class Mage extends Player {
 
         List<Enemy> wantedEnemies = new ArrayList<>(enemies);
         for (Enemy e : enemies){
-            if (!(super.range(this.Position, e.Position) < this.abilityRange)) wantedEnemies.remove(e);
+            if (!(super.range(this.Position, e.Position) <  10000 /*this.abilityRange*/)) wantedEnemies.remove(e); //change it back!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         enemies.clear();
         if (!(wantedEnemies.size() == 0)) {

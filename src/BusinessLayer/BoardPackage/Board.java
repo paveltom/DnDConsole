@@ -45,7 +45,12 @@ public class Board {
     public Player getCurrPlayer(){ return CurrPlayer;}
     public boolean PlayerAlive(){ return PlayerAlive;}
     public int getEnemySize(){ return EnemyList.size();}
-    public void setCurrPlayer(Player updatepalyer){ this.CurrPlayer=updatepalyer;}
+    public void setCurrPlayer(Player updatePlayer){
+        this.CurrPlayer=updatePlayer;
+        int x = this.CurrPlayer.getPosition().getColumnCoordinate();
+        int y = this.CurrPlayer.getPosition().getRowCoordinate();
+        this.CurrBoard[y][x] = this.CurrPlayer;
+    }
     
     public List<String> gameTick(String userInput)
     {
