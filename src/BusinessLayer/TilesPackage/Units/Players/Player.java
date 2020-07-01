@@ -36,8 +36,6 @@ public abstract class Player extends Unit {
     }
 
 
-    //updatePosition
-
     @Override
     public Coordinate actionPerTick(String userInput){
         int x = this.Position.getColumnCoordinate();

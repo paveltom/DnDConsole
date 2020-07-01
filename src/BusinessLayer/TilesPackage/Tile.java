@@ -6,7 +6,6 @@ import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Environment.Wall;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Players.Player;
-import BusinessLayer.TilesPackage.Units.Unit;
 
 public class Tile {
 

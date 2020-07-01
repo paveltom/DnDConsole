@@ -11,8 +11,6 @@ public abstract class Enemy extends Unit {
     public Enemy(String[][] boardData, int x, int y,char c)
     {
         super(boardData, x, y,c);
-        //Experience is an Unit abstract class field!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //experience_value=Integer.parseInt(boardData[1][boardData[1].length]);
     }
 
 

@@ -19,8 +19,6 @@ public class Board {
     private Creator BoardCreator;
     private List<String> Output;
     private String PlayerSelection;  //String of characters' selection options
-    private boolean TickCheck = false; //?????????????????????????????
-
 
     public Board() {
         this.BoardCreator = new Creator();

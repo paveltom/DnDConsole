@@ -1,14 +1,8 @@
 package BusinessLayer.TilesPackage.Units;
 
-import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.Coordinate;
 import BusinessLayer.Subscriber;
-import BusinessLayer.TilesPackage.Environment.Empty;
 import BusinessLayer.TilesPackage.Tile;
-import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
-import BusinessLayer.TilesPackage.Units.Players.Player;
-
-import java.util.List;
 
 public abstract class Unit extends Tile implements Subscriber {
 
@@ -16,7 +10,6 @@ public abstract class Unit extends Tile implements Subscriber {
     public String Name;
     public Integer HealthPool; //maximum health
     public Integer HealthAmount; //current health
-    public Integer Health; // get\set?????   do we need it at all????????????????
     public Integer AttackPoints;
     public Integer DefensePoints;
     public boolean ActualStatus;
@@ -31,14 +24,6 @@ public abstract class Unit extends Tile implements Subscriber {
         this.ActualStatus = true;
     }
 
-
-    //updateStatus - listener pattern
-    //updateTick
-
-    //getters for all the fields?????????
-
-    //public randomizeValue
-
     public abstract String actualStats();
 
     public abstract Coordinate actionPerTick(String s);
@@ -49,10 +34,6 @@ public abstract class Unit extends Tile implements Subscriber {
         Double result = Math.sqrt(Math.pow((c1.getColumnCoordinate() - c2.getColumnCoordinate()), 2) + Math.pow((c1.getRowCoordinate() - c2.getRowCoordinate()), 2));
         return result.intValue();
     }
-
-
-    //abstract move
-    //abstract
 
     @Override
     public void updateActualStatus() {

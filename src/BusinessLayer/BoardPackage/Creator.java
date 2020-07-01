@@ -88,7 +88,7 @@ public class Creator {
         }
         return output;
     }
-    public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
+    public Map<String,String[][]> getMap () {return CharactersDataBase;}
     public Player getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()
     {
