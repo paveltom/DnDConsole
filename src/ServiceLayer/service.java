@@ -2,12 +2,8 @@ package ServiceLayer;
 
 import BusinessLayer.BoardPackage.Board;
 import BusinessLayer.TilesPackage.Units.Players.Player;
-import BusinessLayer.TilesPackage.Units.Unit;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
