@@ -28,6 +28,7 @@ public class Rogue extends Player {
 
         output.add(this.Name + " reached level " + this.Level + ": +" + (this.HealthPool - health) + " Health, +" + (this.AttackPoints - attack) +
                 " Attack, +" + (this.DefensePoints - defense) + " Defense."); //make sure it is printable in appropriate way in Console
+        if (this.Experience >= (50 * this.Level)) this.updateExperience(0, output);
     }
 
 
