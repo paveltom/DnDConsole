@@ -36,8 +36,8 @@ public class service {
     private void selecetplayer() {
         input = "";
         input = scan.nextLine();
-        if (!(input.compareTo("0") > 0 & input.compareTo("7") < 0)) {
-            System.out.println("Select a player according to numbers 1 to 6");
+        if (!(input.compareTo("0") > 0 & input.compareTo("8") < 0)) {
+            System.out.println("Select a player according to numbers 1 to 7");
             selecetplayer();
         }
         b.crateBoard(level, Integer.parseInt(input));
@@ -81,6 +81,7 @@ public class service {
 
     private String[][] readfile(String[] args) throws FileNotFoundException {
         String target_dir = "levels/";
+        if(args.length>0) {target_dir=args[0];}
         File dir = new File(target_dir);
         File[] files = dir.listFiles();
         if (index < files.length) {

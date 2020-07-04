@@ -6,10 +6,7 @@ import BusinessLayer.TilesPackage.Tile;
 import BusinessLayer.TilesPackage.Units.Enemies.Enemy;
 import BusinessLayer.TilesPackage.Units.Enemies.Monster;
 import BusinessLayer.TilesPackage.Units.Enemies.Trap;
-import BusinessLayer.TilesPackage.Units.Players.Mage;
-import BusinessLayer.TilesPackage.Units.Players.Player;
-import BusinessLayer.TilesPackage.Units.Players.Rogue;
-import BusinessLayer.TilesPackage.Units.Players.Warrior;
+import BusinessLayer.TilesPackage.Units.Players.*;
 import BusinessLayer.TilesPackage.Units.Unit;
 
 import java.util.*;
@@ -18,11 +15,13 @@ public class Creator {
     private final String w = "Warrior";
     private final String ma = "Mage";
     private final String r ="Rogue";
+    private final String h ="Hunter";
     private final String t = "Trap";
     private final String m = "Monster";
     private final String[] wd = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Cooldown:"};
     private final String[] md = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Mana:","Spell Power:"};
     private final String[] rd = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Energy:"};
+    private final String[] hd = {"Type:","Name:","Health:","Attack:","Defense:","Level:","Experience:","Arrows:","Range:"};
     private final String[] Md = {"Type:","Name:","Health:","Attack:","Defense:","Vision Range","Experience Value:"};
     private final String[] td = {"Type:","Name:","Health:","Attack:","Defense:","Experience Value:","Visibility Time:","Invisibility Time:"};
     private final String[] jon_snow ={w,"Jon Snow","300","30","4","1","50","3"};
@@ -31,6 +30,7 @@ public class Creator {
     private final String[] thoros_of_myr ={ma,"Thoros of Myr","250","25","4","1","50","150","20","20","3","4"};
     private final String[] arya_stark ={r,"Arya Stark","150","40","2","1","50","100"};
     private final String[] bronn ={r,"Bronn","250","35","3","1","50","100"};
+    private final String[] ygritte = {h,"Ygritee","220","30","2","1","50","10","6"};
     private final String[] lannister_solider ={m,"Lannister Solider","80","8","3","3","25"};
     private final String[] lannister_knight ={m,"Lannister Knight","200","14","8","4","50"};
     private final String[] queens_guard ={m,"Queen’s Guard","400","20","15","5","100"};
@@ -61,6 +61,7 @@ public class Creator {
         setthoros_of_myr();
         setarya_stark();
         setbronn();
+        setYgritte();
         setlannister_solider();
         setLannister_knight();
         setQueens_guard();
@@ -88,7 +89,7 @@ public class Creator {
         }
         return output;
     }
-    public Map<String,String[][]> getMap () {return CharactersDataBase;}
+    public Map<String,String[][]> getMap () {return CharactersDataBase;}////////////////////
     public Player getCurrPlayer(){return CurrPlayer;}
     public String PlayerSelection()
     {
@@ -123,6 +124,7 @@ public class Creator {
     }
     public Tile [][] createBoard(String[][] level,int p)
     {
+        EnemyList.clear();
         board = new Tile[level.length][];
         Tile[] Currline;
         for(int i=0;i<level.length;i++)
@@ -146,6 +148,10 @@ public class Creator {
                     }
                     else if (type.equals("Rogue")) {
                         CurrPlayer = new Rogue(curr, j, i,level[i][j]);
+                        Currline[j]=CurrPlayer;
+                    }
+                    if (type.equals("Hunter")) {
+                        CurrPlayer = new Hunter(curr, j, i,level[i][j]);
                         Currline[j]=CurrPlayer;
                     }
                 }
@@ -318,6 +324,13 @@ public class Creator {
         m1[0]=td;
         m1[1]=death_trap;
         CharactersDataBase.put("D",m1);
+    }
+    private void setYgritte()
+    {
+        String[][] m1 = new String[2][];
+        m1[0]=hd;
+        m1[1]=ygritte;
+        CharactersDataBase.put("7",m1);
     }
 
 
